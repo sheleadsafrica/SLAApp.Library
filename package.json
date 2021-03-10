@@ -1,0 +1,28 @@
+{
+  "name": "@bridgelabsdesign/sla-platform-ts-client",
+  "version": "0.0.1",
+  "description": "OpenAPI client for SLA Platform",
+  "author": "Eduardo Koloma Junior",
+  "keywords": [
+    "axios",
+    "typescript",
+    "openapi-client",
+    "openapi-generator",
+    "she-leads-africa"
+  ],
+  "license": "Unlicense",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --outDir dist/",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "react-native-url-polyfill": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.5",
+    "typescript": "^3.6.4"
+  }
+}
