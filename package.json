@@ -1,6 +1,6 @@
 {
   "name": "@bridgelabsdesign/sla-platform-ts-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OpenAPI client for SLA Platform",
   "author": "Eduardo Koloma Junior",
   "keywords": [
@@ -18,8 +18,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "react-native-url-polyfill": "^1.2.0"
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@types/node": "^12.11.5",

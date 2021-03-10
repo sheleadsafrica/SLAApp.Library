@@ -11,10 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-/* polyfills */
-/** URL polyfill */
-import 'react-native-url-polyfill/auto';
-
 export * from "./api";
 export * from "./configuration";
 
