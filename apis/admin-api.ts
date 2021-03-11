@@ -49,7 +49,7 @@ import { LegalDocumentCreationRequest } from '../models';
 import { LegalDocumentCreationResponse } from '../models';
 import { LegalDocumentUpdateRequest } from '../models';
 import { LegalDocumentUpdateResponse } from '../models';
-import { ListCustomersResponse } from '../models';
+import { ListUsersResponse } from '../models';
 import { MoneyTipCreationRequest } from '../models';
 import { MoneyTipCreationResponse } from '../models';
 import { MoneyTipUpdateRequest } from '../models';
@@ -1608,7 +1608,7 @@ export const AdminApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCustomers(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListCustomersResponse>> {
+        async listCustomers(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsersResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).listCustomers(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1975,7 +1975,7 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCustomers(options?: any): AxiosPromise<ListCustomersResponse> {
+        listCustomers(options?: any): AxiosPromise<ListUsersResponse> {
             return AdminApiFp(configuration).listCustomers(options).then((request) => request(axios, basePath));
         },
         /**

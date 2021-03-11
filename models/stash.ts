@@ -14,25 +14,49 @@
 /**
  * 
  * @export
- * @interface RecoveryAddress
+ * @interface Stash
  */
-export interface RecoveryAddress {
+export interface Stash {
     /**
      * 
      * @type {string}
-     * @memberof RecoveryAddress
+     * @memberof Stash
      */
     id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof RecoveryAddress
+     * @memberof Stash
      */
-    value?: any | null;
+    name?: any | null;
     /**
      * 
-     * @type {RecoveryAddressType}
-     * @memberof RecoveryAddress
+     * @type {number}
+     * @memberof Stash
      */
-    via?: any;
+    interest?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof Stash
+     */
+    minDays?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof Stash
+     */
+    maxDays?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Stash
+     */
+    active?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof Stash
+     */
+    created?: any;
 }

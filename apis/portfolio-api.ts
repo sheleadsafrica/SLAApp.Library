@@ -25,9 +25,12 @@ import { AchievementsResponse } from '../models';
 import { DepositRequest } from '../models';
 import { DepositResponse } from '../models';
 import { GoalTagsResponse } from '../models';
+import { InvestmentByIdResponse } from '../models';
 import { InvestmentsResponse } from '../models';
 import { Overview } from '../models';
 import { ProblemDetails } from '../models';
+import { StashByIdResponse } from '../models';
+import { StashesResponse } from '../models';
 import { TransactionResponse } from '../models';
 import { WithdrawalConfirmationRequest } from '../models';
 import { WithdrawalRequest } from '../models';
@@ -251,6 +254,45 @@ export const PortfolioApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        investmentById: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling investmentById.');
+            }
+            const localVarPath = `/portfolio/investment/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -355,6 +397,39 @@ export const PortfolioApiAxiosParamCreator = function (configuration?: Configura
          */
         listInvestments: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/portfolio/investments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listStashes: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/stashes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -499,6 +574,45 @@ export const PortfolioApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stashById: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling stashById.');
+            }
+            const localVarPath = `/portfolio/stash/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
          * @param {WithdrawalRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -619,6 +733,19 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async investmentById(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InvestmentByIdResponse>> {
+            const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).investmentById(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -667,6 +794,18 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listStashes(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StashesResponse>> {
+            const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).listStashes(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {AccountCreationRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -699,6 +838,19 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
          */
         async requestDeposit(id: string, body?: DepositRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DepositResponse>> {
             const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).requestDeposit(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async stashById(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StashByIdResponse>> {
+            const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).stashById(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -777,6 +929,15 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        investmentById(id: string, options?: any): AxiosPromise<InvestmentByIdResponse> {
+            return PortfolioApiFp(configuration).investmentById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -809,6 +970,14 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listStashes(options?: any): AxiosPromise<StashesResponse> {
+            return PortfolioApiFp(configuration).listStashes(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {AccountCreationRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -833,6 +1002,15 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
          */
         requestDeposit(id: string, body?: DepositRequest, options?: any): AxiosPromise<DepositResponse> {
             return PortfolioApiFp(configuration).requestDeposit(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        stashById(id: string, options?: any): AxiosPromise<StashByIdResponse> {
+            return PortfolioApiFp(configuration).stashById(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -909,6 +1087,16 @@ export class PortfolioApi extends BaseAPI {
     }
     /**
      * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioApi
+     */
+    public investmentById(id: string, options?: any) {
+        return PortfolioApiFp(this.configuration).investmentById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PortfolioApi
@@ -945,6 +1133,15 @@ export class PortfolioApi extends BaseAPI {
     }
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioApi
+     */
+    public listStashes(options?: any) {
+        return PortfolioApiFp(this.configuration).listStashes(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {AccountCreationRequest} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -972,6 +1169,16 @@ export class PortfolioApi extends BaseAPI {
      */
     public requestDeposit(id: string, body?: DepositRequest, options?: any) {
         return PortfolioApiFp(this.configuration).requestDeposit(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioApi
+     */
+    public stashById(id: string, options?: any) {
+        return PortfolioApiFp(this.configuration).stashById(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

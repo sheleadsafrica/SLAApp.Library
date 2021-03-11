@@ -21,6 +21,7 @@ import { BeginVerificationResponse } from '../models';
 import { CompleteVerification } from '../models';
 import { CompleteVerificationResponse } from '../models';
 import { ProblemDetails } from '../models';
+import { Signup } from '../models';
 /**
  * RegistrationApi - axios parameter creator
  * @export
@@ -103,6 +104,44 @@ export const RegistrationApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {Signup} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signup: async (body?: Signup, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/registration`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -138,6 +177,19 @@ export const RegistrationApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @param {Signup} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async signup(body?: Signup, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await RegistrationApiAxiosParamCreator(configuration).signup(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -164,6 +216,15 @@ export const RegistrationApiFactory = function (configuration?: Configuration, b
          */
         completePhoneVerification(body?: CompleteVerification, options?: any): AxiosPromise<CompleteVerificationResponse> {
             return RegistrationApiFp(configuration).completePhoneVerification(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {Signup} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signup(body?: Signup, options?: any): AxiosPromise<void> {
+            return RegistrationApiFp(configuration).signup(body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -194,5 +255,15 @@ export class RegistrationApi extends BaseAPI {
      */
     public completePhoneVerification(body?: CompleteVerification, options?: any) {
         return RegistrationApiFp(this.configuration).completePhoneVerification(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {Signup} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RegistrationApi
+     */
+    public signup(body?: Signup, options?: any) {
+        return RegistrationApiFp(this.configuration).signup(body, options).then((request) => request(this.axios, this.basePath));
     }
 }

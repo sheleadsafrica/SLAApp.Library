@@ -14,7 +14,13 @@
 /**
  * 
  * @export
- * @interface VerifiableAddressStatus
+ * @interface StashesResponse
  */
-export interface VerifiableAddressStatus {
+export interface StashesResponse {
+    /**
+     * 
+     * @type {Array&lt;Stash&gt;}
+     * @memberof StashesResponse
+     */
+    stashes?: any | null;
 }

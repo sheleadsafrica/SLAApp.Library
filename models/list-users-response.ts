@@ -14,7 +14,13 @@
 /**
  * 
  * @export
- * @interface RecoveryAddressType
+ * @interface ListUsersResponse
  */
-export interface RecoveryAddressType {
+export interface ListUsersResponse {
+    /**
+     * 
+     * @type {Array&lt;User&gt;}
+     * @memberof ListUsersResponse
+     */
+    users?: any | null;
 }
