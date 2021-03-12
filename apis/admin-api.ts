@@ -55,6 +55,10 @@ import { MoneyTipCreationResponse } from '../models';
 import { MoneyTipUpdateRequest } from '../models';
 import { MoneyTipUpdateResponse } from '../models';
 import { ProblemDetails } from '../models';
+import { StashCreationRequest } from '../models';
+import { StashCreationResponse } from '../models';
+import { StashUpdateRequest } from '../models';
+import { StashUpdateResponse } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
 import { WebinarPostUpdateRequest } from '../models';
@@ -383,6 +387,44 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          */
         createMoneyTip: async (body?: MoneyTipCreationRequest, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/media/admin/money-tip`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {StashCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createStash: async (body?: StashCreationRequest, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/admin/stash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1246,6 +1288,50 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * 
+         * @param {string} id 
+         * @param {StashUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateStash: async (id: string, body?: StashUpdateRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateStash.');
+            }
+            const localVarPath = `/portfolio/admin/stash/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
@@ -1460,6 +1546,19 @@ export const AdminApiFp = function(configuration?: Configuration) {
          */
         async createMoneyTip(body?: MoneyTipCreationRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MoneyTipCreationResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createMoneyTip(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {StashCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createStash(body?: StashCreationRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StashCreationResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createStash(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1748,6 +1847,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {string} id 
+         * @param {StashUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateStash(id: string, body?: StashUpdateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StashUpdateResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).updateStash(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
@@ -1871,6 +1984,15 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         createMoneyTip(body?: MoneyTipCreationRequest, options?: any): AxiosPromise<MoneyTipCreationResponse> {
             return AdminApiFp(configuration).createMoneyTip(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {StashCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createStash(body?: StashCreationRequest, options?: any): AxiosPromise<StashCreationResponse> {
+            return AdminApiFp(configuration).createStash(body, options).then((request) => request(axios, basePath));
         },
         /**
          * This can only be done by the logged in user.
@@ -2075,6 +2197,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
             return AdminApiFp(configuration).updateMoneyTip(id, body, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @param {string} id 
+         * @param {StashUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateStash(id: string, body?: StashUpdateRequest, options?: any): AxiosPromise<StashUpdateResponse> {
+            return AdminApiFp(configuration).updateStash(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
@@ -2200,6 +2332,16 @@ export class AdminApi extends BaseAPI {
      */
     public createMoneyTip(body?: MoneyTipCreationRequest, options?: any) {
         return AdminApiFp(this.configuration).createMoneyTip(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {StashCreationRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public createStash(body?: StashCreationRequest, options?: any) {
+        return AdminApiFp(this.configuration).createStash(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
@@ -2422,6 +2564,17 @@ export class AdminApi extends BaseAPI {
      */
     public updateMoneyTip(id: string, body?: MoneyTipUpdateRequest, options?: any) {
         return AdminApiFp(this.configuration).updateMoneyTip(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {StashUpdateRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public updateStash(id: string, body?: StashUpdateRequest, options?: any) {
+        return AdminApiFp(this.configuration).updateStash(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.

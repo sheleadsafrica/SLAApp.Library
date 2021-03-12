@@ -49,6 +49,12 @@ export interface AccountDetail {
     createdAt?: any;
     /**
      * 
+     * @type {number}
+     * @memberof AccountDetail
+     */
+    start?: any;
+    /**
+     * 
      * @type {AccountType}
      * @memberof AccountDetail
      */
@@ -65,4 +71,22 @@ export interface AccountDetail {
      * @memberof AccountDetail
      */
     currency?: any | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountDetail
+     */
+    interest?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountDetail
+     */
+    end?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountDetail
+     */
+    target?: any;
 }

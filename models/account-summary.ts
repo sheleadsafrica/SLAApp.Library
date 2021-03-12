@@ -31,6 +31,12 @@ export interface AccountSummary {
     createdAt?: any;
     /**
      * 
+     * @type {number}
+     * @memberof AccountSummary
+     */
+    start?: any;
+    /**
+     * 
      * @type {AccountType}
      * @memberof AccountSummary
      */
@@ -47,4 +53,28 @@ export interface AccountSummary {
      * @memberof AccountSummary
      */
     currency?: any | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountSummary
+     */
+    interest?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountSummary
+     */
+    end?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountSummary
+     */
+    balance?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountSummary
+     */
+    target?: any;
 }
