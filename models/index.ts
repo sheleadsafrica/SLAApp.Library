@@ -1,5 +1,6 @@
 export * from './account-challenge-config';
 export * from './account-closure-confirmation-request';
+export * from './account-config';
 export * from './account-creation-request';
 export * from './account-creation-response';
 export * from './account-detail';

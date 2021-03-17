@@ -31,6 +31,12 @@ export interface AccountDetail {
     balance?: any;
     /**
      * 
+     * @type {AccountConfig}
+     * @memberof AccountDetail
+     */
+    config?: any;
+    /**
+     * 
      * @type {Array&lt;TransactionSummary&gt;}
      * @memberof AccountDetail
      */
