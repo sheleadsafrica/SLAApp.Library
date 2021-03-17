@@ -21,6 +21,7 @@ import { AccountCreationRequest } from '../models';
 import { AccountCreationResponse } from '../models';
 import { AccountDetail } from '../models';
 import { AccountSummary } from '../models';
+import { AccountTransactionsResponse } from '../models';
 import { AchievementsResponse } from '../models';
 import { DepositRequest } from '../models';
 import { DepositResponse } from '../models';
@@ -31,7 +32,6 @@ import { Overview } from '../models';
 import { ProblemDetails } from '../models';
 import { StashByIdResponse } from '../models';
 import { StashesResponse } from '../models';
-import { TransactionResponse } from '../models';
 import { WithdrawalConfirmationRequest } from '../models';
 import { WithdrawalRequest } from '../models';
 import { WithdrawalResponse } from '../models';
@@ -724,7 +724,7 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountTransactions(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionResponse>> {
+        async getAccountTransactions(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountTransactionsResponse>> {
             const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).getAccountTransactions(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -924,7 +924,7 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountTransactions(id: string, options?: any): AxiosPromise<TransactionResponse> {
+        getAccountTransactions(id: string, options?: any): AxiosPromise<AccountTransactionsResponse> {
             return PortfolioApiFp(configuration).getAccountTransactions(id, options).then((request) => request(axios, basePath));
         },
         /**

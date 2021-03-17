@@ -14,31 +14,31 @@
 /**
  * 
  * @export
- * @interface TransactionResponse
+ * @interface Transaction
  */
-export interface TransactionResponse {
+export interface Transaction {
     /**
      * 
      * @type {string}
-     * @memberof TransactionResponse
+     * @memberof Transaction
      */
-    accountId?: any | null;
+    id?: any | null;
     /**
      * 
-     * @type {Array&lt;TransactionSummary&gt;}
-     * @memberof TransactionResponse
+     * @type {TransactionStatus}
+     * @memberof Transaction
      */
-    transactions?: any | null;
+    status?: any;
     /**
      * 
      * @type {number}
-     * @memberof TransactionResponse
+     * @memberof Transaction
      */
-    value: any;
+    transactionDate?: any;
     /**
      * 
-     * @type {string}
-     * @memberof TransactionResponse
+     * @type {number}
+     * @memberof Transaction
      */
-    currency: any;
+    amount?: any;
 }
