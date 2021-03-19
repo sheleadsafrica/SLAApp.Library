@@ -29,4 +29,10 @@ export interface AddBankAccountRequest {
      * @memberof AddBankAccountRequest
      */
     accountNumber?: any | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AddBankAccountRequest
+     */
+    commit?: any;
 }
