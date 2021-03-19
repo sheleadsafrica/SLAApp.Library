@@ -16,9 +16,14 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { AcceptedBanksResponse } from '../models';
+import { AddBankAccountRequest } from '../models';
+import { AddBankAccountResponse } from '../models';
 import { AddCardRequest } from '../models';
 import { AddCardResponse } from '../models';
+import { BankAccountsByOwnerIdResponse } from '../models';
 import { CardsByOwnerIdResponse } from '../models';
+import { DeleteBankAccountAccountResponse } from '../models';
 import { DeleteCardResponse } from '../models';
 import { FlutterwaveWebhook } from '../models';
 import { ProblemDetails } from '../models';
@@ -30,6 +35,44 @@ import { VerifyCardResponse } from '../models';
  */
 export const PaymentsApiApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {AddBankAccountRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addBankaccount: async (body?: AddBankAccountRequest, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment/bank`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {AddCardRequest} [body] 
@@ -74,6 +117,45 @@ export const PaymentsApiApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        deleteBankAccount: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteBankAccount.');
+            }
+            const localVarPath = `/payment/bank-account/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         deleteCard: async (id: string, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
@@ -88,6 +170,72 @@ export const PaymentsApiApiAxiosParamCreator = function (configuration?: Configu
                 baseOptions = configuration.baseOptions;
             }
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBankAccounts: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment/bank-accounts`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBankList: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/payment/bank-info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -239,6 +387,19 @@ export const PaymentsApiApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {AddBankAccountRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addBankaccount(body?: AddBankAccountRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AddBankAccountResponse>> {
+            const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).addBankaccount(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {AddCardRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -256,8 +417,45 @@ export const PaymentsApiApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async deleteBankAccount(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteBankAccountAccountResponse>> {
+            const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).deleteBankAccount(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async deleteCard(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteCardResponse>> {
             const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).deleteCard(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBankAccounts(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BankAccountsByOwnerIdResponse>> {
+            const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).getBankAccounts(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBankList(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AcceptedBanksResponse>> {
+            const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).getBankList(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -314,6 +512,15 @@ export const PaymentsApiApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
+         * @param {AddBankAccountRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addBankaccount(body?: AddBankAccountRequest, options?: any): AxiosPromise<AddBankAccountResponse> {
+            return PaymentsApiApiFp(configuration).addBankaccount(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {AddCardRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -327,8 +534,33 @@ export const PaymentsApiApiFactory = function (configuration?: Configuration, ba
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        deleteBankAccount(id: string, options?: any): AxiosPromise<DeleteBankAccountAccountResponse> {
+            return PaymentsApiApiFp(configuration).deleteBankAccount(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         deleteCard(id: string, options?: any): AxiosPromise<DeleteCardResponse> {
             return PaymentsApiApiFp(configuration).deleteCard(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBankAccounts(options?: any): AxiosPromise<BankAccountsByOwnerIdResponse> {
+            return PaymentsApiApiFp(configuration).getBankAccounts(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBankList(options?: any): AxiosPromise<AcceptedBanksResponse> {
+            return PaymentsApiApiFp(configuration).getBankList(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -370,6 +602,16 @@ export const PaymentsApiApiFactory = function (configuration?: Configuration, ba
 export class PaymentsApiApi extends BaseAPI {
     /**
      * 
+     * @param {AddBankAccountRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentsApiApi
+     */
+    public addBankaccount(body?: AddBankAccountRequest, options?: any) {
+        return PaymentsApiApiFp(this.configuration).addBankaccount(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {AddCardRequest} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -385,8 +627,36 @@ export class PaymentsApiApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PaymentsApiApi
      */
+    public deleteBankAccount(id: string, options?: any) {
+        return PaymentsApiApiFp(this.configuration).deleteBankAccount(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentsApiApi
+     */
     public deleteCard(id: string, options?: any) {
         return PaymentsApiApiFp(this.configuration).deleteCard(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentsApiApi
+     */
+    public getBankAccounts(options?: any) {
+        return PaymentsApiApiFp(this.configuration).getBankAccounts(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentsApiApi
+     */
+    public getBankList(options?: any) {
+        return PaymentsApiApiFp(this.configuration).getBankList(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
