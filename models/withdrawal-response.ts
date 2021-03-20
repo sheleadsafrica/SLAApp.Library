@@ -31,12 +31,6 @@ export interface WithdrawalResponse {
     bankAccountId?: any | null;
     /**
      * 
-     * @type {string}
-     * @memberof WithdrawalResponse
-     */
-    transactionId?: any | null;
-    /**
-     * 
      * @type {number}
      * @memberof WithdrawalResponse
      */
