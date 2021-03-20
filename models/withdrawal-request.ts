@@ -25,12 +25,6 @@ export interface WithdrawalRequest {
     bankAccountId: any;
     /**
      * 
-     * @type {string}
-     * @memberof WithdrawalRequest
-     */
-    ownerId: any;
-    /**
-     * 
      * @type {number}
      * @memberof WithdrawalRequest
      */
