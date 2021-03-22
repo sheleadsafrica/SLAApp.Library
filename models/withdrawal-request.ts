@@ -22,6 +22,12 @@ export interface WithdrawalRequest {
      * @type {string}
      * @memberof WithdrawalRequest
      */
+    txRef: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof WithdrawalRequest
+     */
     bankAccountId: any;
     /**
      * 

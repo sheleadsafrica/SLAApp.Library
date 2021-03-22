@@ -28,7 +28,7 @@ export interface DepositResponse {
      * @type {string}
      * @memberof DepositResponse
      */
-    transactionId?: any | null;
+    txRef?: any | null;
     /**
      * 
      * @type {number}

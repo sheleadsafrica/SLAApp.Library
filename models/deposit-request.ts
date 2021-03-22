@@ -28,7 +28,13 @@ export interface DepositRequest {
      * @type {string}
      * @memberof DepositRequest
      */
-    accountId?: any | null;
+    accountId: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof DepositRequest
+     */
+    txRef: any;
     /**
      * 
      * @type {number}
