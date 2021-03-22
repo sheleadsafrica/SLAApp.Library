@@ -22,6 +22,7 @@ import { CompleteVerification } from '../models';
 import { CompleteVerificationResponse } from '../models';
 import { ProblemDetails } from '../models';
 import { Signup } from '../models';
+import { SignupResponse } from '../models';
 /**
  * RegistrationApi - axios parameter creator
  * @export
@@ -183,7 +184,7 @@ export const RegistrationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signup(body?: Signup, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async signup(body?: Signup, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SignupResponse>> {
             const localVarAxiosArgs = await RegistrationApiAxiosParamCreator(configuration).signup(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -223,7 +224,7 @@ export const RegistrationApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signup(body?: Signup, options?: any): AxiosPromise<void> {
+        signup(body?: Signup, options?: any): AxiosPromise<SignupResponse> {
             return RegistrationApiFp(configuration).signup(body, options).then((request) => request(axios, basePath));
         },
     };
