@@ -31,6 +31,24 @@ export interface ChallengeByStartRangeResponse {
     name?: any | null;
     /**
      * 
+     * @type {string}
+     * @memberof ChallengeByStartRangeResponse
+     */
+    fundsInvested?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChallengeByStartRangeResponse
+     */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChallengeByStartRangeResponse
+     */
+    imageUrl?: any | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof ChallengeByStartRangeResponse
      */

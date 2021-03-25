@@ -31,6 +31,24 @@ export interface Challenge {
     name?: any | null;
     /**
      * 
+     * @type {string}
+     * @memberof Challenge
+     */
+    fundsInvested?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Challenge
+     */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Challenge
+     */
+    imageUrl?: any | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof Challenge
      */

@@ -35,4 +35,22 @@ export interface ChallengeCreationRequest {
      * @memberof ChallengeCreationRequest
      */
     configs: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChallengeCreationRequest
+     */
+    fundsInvested?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChallengeCreationRequest
+     */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChallengeCreationRequest
+     */
+    imageUrl?: any | null;
 }
