@@ -23,8 +23,7 @@ import { AccountDetail } from '../models';
 import { AccountSummary } from '../models';
 import { AccountTransactionsResponse } from '../models';
 import { AchievementsResponse } from '../models';
-import { ChallengeByIdResponse } from '../models';
-import { ChallengeByStartRangeResponse } from '../models';
+import { Challenge } from '../models';
 import { DepositRequest } from '../models';
 import { DepositResponse } from '../models';
 import { GoalTagsResponse } from '../models';
@@ -743,7 +742,7 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async challengeById(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengeByIdResponse>> {
+        async challengeById(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Challenge>> {
             const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).challengeById(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -755,7 +754,7 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async challengeForCurrentMonth(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengeByStartRangeResponse>> {
+        async challengeForCurrentMonth(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Challenge>> {
             const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).challengeForCurrentMonth(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -984,7 +983,7 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        challengeById(id: string, options?: any): AxiosPromise<ChallengeByIdResponse> {
+        challengeById(id: string, options?: any): AxiosPromise<Challenge> {
             return PortfolioApiFp(configuration).challengeById(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -992,7 +991,7 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        challengeForCurrentMonth(options?: any): AxiosPromise<ChallengeByStartRangeResponse> {
+        challengeForCurrentMonth(options?: any): AxiosPromise<Challenge> {
             return PortfolioApiFp(configuration).challengeForCurrentMonth(options).then((request) => request(axios, basePath));
         },
         /**

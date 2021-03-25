@@ -53,4 +53,10 @@ export interface ChallengeCreationRequest {
      * @memberof ChallengeCreationRequest
      */
     imageUrl?: any | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChallengeCreationRequest
+     */
+    incomePercentage?: any;
 }

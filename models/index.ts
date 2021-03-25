@@ -44,8 +44,6 @@ export * from './body';
 export * from './card';
 export * from './cards-by-owner-id-response';
 export * from './challenge';
-export * from './challenge-by-id-response';
-export * from './challenge-by-start-range-response';
 export * from './challenge-config';
 export * from './challenge-creation-request';
 export * from './challenge-creation-response';

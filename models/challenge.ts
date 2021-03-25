@@ -49,6 +49,12 @@ export interface Challenge {
     imageUrl?: any | null;
     /**
      * 
+     * @type {number}
+     * @memberof Challenge
+     */
+    incomePercentage?: any;
+    /**
+     * 
      * @type {boolean}
      * @memberof Challenge
      */
