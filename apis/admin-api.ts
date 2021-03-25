@@ -28,6 +28,11 @@ import { BlogPostCreationRequest } from '../models';
 import { BlogPostCreationResponse } from '../models';
 import { BlogPostUpdateRequest } from '../models';
 import { BlogPostUpdateResponse } from '../models';
+import { ChallengeCreationRequest } from '../models';
+import { ChallengeCreationResponse } from '../models';
+import { ChallengeUpdateRequest } from '../models';
+import { ChallengeUpdateResponse } from '../models';
+import { ChallengesResponse } from '../models';
 import { FAQCreationRequest } from '../models';
 import { FAQCreationResponse } from '../models';
 import { FAQUpdateRequest } from '../models';
@@ -155,6 +160,44 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          */
         createBlogPost: async (body?: BlogPostCreationRequest, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/media/admin/blog`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {ChallengeCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createChallenge: async (body?: ChallengeCreationRequest, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/admin/challenge`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -857,6 +900,39 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        listChallenges: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/admin/challenges`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         listCustomers: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/admin/customers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -988,6 +1064,50 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
                 throw new RequiredError('id','Required parameter id was null or undefined when calling updateBlogPost.');
             }
             const localVarPath = `/media/admin/blog/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ChallengeUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChallenge: async (id: string, body?: ChallengeUpdateRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateChallenge.');
+            }
+            const localVarPath = `/portfolio/admin/challenge/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1470,6 +1590,19 @@ export const AdminApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {ChallengeCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createChallenge(body?: ChallengeCreationRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengeCreationResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createChallenge(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Create a new FAQ
          * @param {FAQCreationRequest} [body] request values
@@ -1707,6 +1840,18 @@ export const AdminApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async listChallenges(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengesResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).listChallenges(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async listCustomers(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListUsersResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).listCustomers(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
@@ -1753,6 +1898,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
          */
         async updateBlogPost(id: string, body?: BlogPostUpdateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BlogPostUpdateResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).updateBlogPost(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ChallengeUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateChallenge(id: string, body?: ChallengeUpdateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChallengeUpdateResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).updateChallenge(id, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1928,6 +2087,15 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
             return AdminApiFp(configuration).createBlogPost(body, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @param {ChallengeCreationRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createChallenge(body?: ChallengeCreationRequest, options?: any): AxiosPromise<ChallengeCreationResponse> {
+            return AdminApiFp(configuration).createChallenge(body, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Create a new FAQ
          * @param {FAQCreationRequest} [body] request values
@@ -2097,6 +2265,14 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        listChallenges(options?: any): AxiosPromise<ChallengesResponse> {
+            return AdminApiFp(configuration).listChallenges(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         listCustomers(options?: any): AxiosPromise<ListUsersResponse> {
             return AdminApiFp(configuration).listCustomers(options).then((request) => request(axios, basePath));
         },
@@ -2131,6 +2307,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         updateBlogPost(id: string, body?: BlogPostUpdateRequest, options?: any): AxiosPromise<BlogPostUpdateResponse> {
             return AdminApiFp(configuration).updateBlogPost(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ChallengeUpdateRequest} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateChallenge(id: string, body?: ChallengeUpdateRequest, options?: any): AxiosPromise<ChallengeUpdateResponse> {
+            return AdminApiFp(configuration).updateChallenge(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * This can only be done by the logged in user.
@@ -2268,6 +2454,16 @@ export class AdminApi extends BaseAPI {
      */
     public createBlogPost(body?: BlogPostCreationRequest, options?: any) {
         return AdminApiFp(this.configuration).createBlogPost(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {ChallengeCreationRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public createChallenge(body?: ChallengeCreationRequest, options?: any) {
+        return AdminApiFp(this.configuration).createChallenge(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
@@ -2457,6 +2653,15 @@ export class AdminApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AdminApi
      */
+    public listChallenges(options?: any) {
+        return AdminApiFp(this.configuration).listChallenges(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
     public listCustomers(options?: any) {
         return AdminApiFp(this.configuration).listCustomers(options).then((request) => request(this.axios, this.basePath));
     }
@@ -2494,6 +2699,17 @@ export class AdminApi extends BaseAPI {
      */
     public updateBlogPost(id: string, body?: BlogPostUpdateRequest, options?: any) {
         return AdminApiFp(this.configuration).updateBlogPost(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {ChallengeUpdateRequest} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public updateChallenge(id: string, body?: ChallengeUpdateRequest, options?: any) {
+        return AdminApiFp(this.configuration).updateChallenge(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
