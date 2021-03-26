@@ -77,4 +77,10 @@ export interface AccountSummary {
      * @memberof AccountSummary
      */
     target?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountSummary
+     */
+    active?: any;
 }

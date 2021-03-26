@@ -22,5 +22,17 @@ export interface AccountChallengeConfig {
      * @type {string}
      * @memberof AccountChallengeConfig
      */
-    challengeId?: any | null;
+    challengeId: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccountChallengeConfig
+     */
+    configId: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountChallengeConfig
+     */
+    amount: any;
 }

@@ -95,4 +95,10 @@ export interface AccountDetail {
      * @memberof AccountDetail
      */
     target?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AccountDetail
+     */
+    active?: any;
 }

@@ -34,5 +34,5 @@ export interface WithdrawalRequest {
      * @type {number}
      * @memberof WithdrawalRequest
      */
-    amount: any;
+    amount?: any;
 }
