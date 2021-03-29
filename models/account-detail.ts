@@ -25,12 +25,6 @@ export interface AccountDetail {
     cardId?: any | null;
     /**
      * 
-     * @type {number}
-     * @memberof AccountDetail
-     */
-    balance?: any;
-    /**
-     * 
      * @type {AccountConfig}
      * @memberof AccountDetail
      */
@@ -89,6 +83,12 @@ export interface AccountDetail {
      * @memberof AccountDetail
      */
     end?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof AccountDetail
+     */
+    balance?: any;
     /**
      * 
      * @type {number}

@@ -14,67 +14,61 @@
 /**
  * 
  * @export
- * @interface User
+ * @interface FinanceProfile
  */
-export interface User {
+export interface FinanceProfile {
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
     id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    firstName?: any | null;
+    monthlyEarnings?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    lastName?: any | null;
+    maritalStatus?: any | null;
     /**
      * 
      * @type {number}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    dob?: any;
+    numKids?: any;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    phoneNumber?: any | null;
+    residenceType?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    email?: any | null;
+    nextOfKin?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    country?: any | null;
+    nextKinNumber?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    currency?: any | null;
+    locationState?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof FinanceProfile
      */
-    experience?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
-    nickname?: any | null;
+    locationLGA?: any | null;
 }

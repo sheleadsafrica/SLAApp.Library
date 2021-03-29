@@ -14,67 +14,61 @@
 /**
  * 
  * @export
- * @interface User
+ * @interface UpdateFinance
  */
-export interface User {
+export interface UpdateFinance {
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    id?: any | null;
+    id?: any;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    firstName?: any | null;
+    monthlyEarnings?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    lastName?: any | null;
+    maritalStatus?: any | null;
     /**
      * 
      * @type {number}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    dob?: any;
+    numKids?: any;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    phoneNumber?: any | null;
+    residenceType?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    email?: any | null;
+    nextOfKin?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    country?: any | null;
+    nextKinNumber?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    currency?: any | null;
+    locationState?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateFinance
      */
-    experience?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
-    nickname?: any | null;
+    locationLGA?: any | null;
 }

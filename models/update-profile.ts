@@ -14,67 +14,43 @@
 /**
  * 
  * @export
- * @interface User
+ * @interface UpdateProfile
  */
-export interface User {
+export interface UpdateProfile {
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateProfile
      */
-    id?: any | null;
+    token?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateProfile
      */
     firstName?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateProfile
      */
     lastName?: any | null;
     /**
      * 
      * @type {number}
-     * @memberof User
+     * @memberof UpdateProfile
      */
     dob?: any;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof UpdateProfile
      */
     phoneNumber?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof User
-     */
-    email?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
-    country?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
-    currency?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
-     */
-    experience?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof User
+     * @memberof UpdateProfile
      */
     nickname?: any | null;
 }
