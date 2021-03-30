@@ -129,6 +129,8 @@ export * from './update-password';
 export * from './update-password-response';
 export * from './update-profile';
 export * from './update-profile-response';
+export * from './update-security-question';
+export * from './update-security-question-response';
 export * from './user';
 export * from './verifiable-address';
 export * from './verify-card-request';
