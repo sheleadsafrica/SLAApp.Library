@@ -28,11 +28,11 @@ export interface ChangePIN {
      * @type {string}
      * @memberof ChangePIN
      */
-    old?: any | null;
+    oldPin?: any | null;
     /**
      * 
      * @type {string}
      * @memberof ChangePIN
      */
-    _new?: any | null;
+    newPin?: any | null;
 }
