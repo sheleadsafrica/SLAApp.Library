@@ -26,6 +26,7 @@ import { UpdateFinanceResponse } from '../models';
 import { UpdatePassword } from '../models';
 import { UpdatePasswordResponse } from '../models';
 import { UpdateProfile } from '../models';
+import { UpdateProfilePictureResponse } from '../models';
 import { UpdateProfileResponse } from '../models';
 import { UpdateSecurityQuestion } from '../models';
 import { UpdateSecurityQuestionResponse } from '../models';
@@ -291,6 +292,48 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadProfilePicture: async (file?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/upload`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -389,6 +432,19 @@ export const UserApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @param {string} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async uploadProfilePicture(file?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateProfilePictureResponse>> {
+            const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).uploadProfilePicture(file, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -458,6 +514,15 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          */
         updateSecurityQuestion(body?: UpdateSecurityQuestion, options?: any): AxiosPromise<UpdateSecurityQuestionResponse> {
             return UserApiFp(configuration).updateSecurityQuestion(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadProfilePicture(file?: string, options?: any): AxiosPromise<UpdateProfilePictureResponse> {
+            return UserApiFp(configuration).uploadProfilePicture(file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -536,5 +601,15 @@ export class UserApi extends BaseAPI {
      */
     public updateSecurityQuestion(body?: UpdateSecurityQuestion, options?: any) {
         return UserApiFp(this.configuration).updateSecurityQuestion(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} [file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public uploadProfilePicture(file?: string, options?: any) {
+        return UserApiFp(this.configuration).uploadProfilePicture(file, options).then((request) => request(this.axios, this.basePath));
     }
 }
