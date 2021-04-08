@@ -14,37 +14,25 @@
 /**
  * 
  * @export
- * @interface BlogComment
+ * @interface CommentLike
  */
-export interface BlogComment {
+export interface CommentLike {
     /**
      * 
      * @type {string}
-     * @memberof BlogComment
+     * @memberof CommentLike
      */
     id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof BlogComment
+     * @memberof CommentLike
      */
-    blogId?: any | null;
+    commentId?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof BlogComment
+     * @memberof CommentLike
      */
     userId?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof BlogComment
-     */
-    body?: any | null;
-    /**
-     * 
-     * @type {Array&lt;CommentLike&gt;}
-     * @memberof BlogComment
-     */
-    likes?: any | null;
 }
