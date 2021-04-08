@@ -43,6 +43,12 @@ export interface BlogComment {
     body?: any | null;
     /**
      * 
+     * @type {number}
+     * @memberof BlogComment
+     */
+    created?: any;
+    /**
+     * 
      * @type {Array&lt;CommentLike&gt;}
      * @memberof BlogComment
      */
