@@ -17,8 +17,11 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { AnnouncementsResponse } from '../models';
+import { BlogPostByIdResponse } from '../models';
 import { BlogPostSummariesResponse } from '../models';
 import { BlogPostsFullResponse } from '../models';
+import { BookmarkRequest } from '../models';
+import { BookmarkedBlogPostsResponse } from '../models';
 import { CommentOnBlogRequest } from '../models';
 import { CommentOnBlogResponse } from '../models';
 import { FAQsResponse } from '../models';
@@ -26,6 +29,7 @@ import { FinanceDictionaryEntriesResponse } from '../models';
 import { LegalDocumentsResponse } from '../models';
 import { LikeRequest } from '../models';
 import { MoneyTipsForYearResponse } from '../models';
+import { SetBlogBookmarkResponse } from '../models';
 import { SetBlogLikeResponse } from '../models';
 import { SetCommentLikeResponse } from '../models';
 import { WebinarPostsFullResponse } from '../models';
@@ -35,6 +39,46 @@ import { WebinarPostsFullResponse } from '../models';
  */
 export const MediaApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get BlogPosts by id
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBlogPost: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getBlogPost.');
+            }
+            const localVarPath = `/media/blog/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * This can only be done by the logged in user.
          * @summary Get all Announcements
@@ -111,6 +155,40 @@ export const MediaApiAxiosParamCreator = function (configuration?: Configuration
          */
         listBlogPostsSummaries: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/media/blogs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get all BlogPosts bookmarked by user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listBookmarkedBlogPosts: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/media/blogs/bookmarked`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -360,6 +438,51 @@ export const MediaApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Like a blog post
+         * @param {string} id blog id
+         * @param {BookmarkRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setBlogBookmarkStatus: async (id: string, body?: BookmarkRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling setBlogBookmarkStatus.');
+            }
+            const localVarPath = `/media/blog/{id}/bookmark`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Like a blog post comment
          * @param {string} id comment id
          * @param {LikeRequest} [body] request params
@@ -459,6 +582,20 @@ export const MediaApiFp = function(configuration?: Configuration) {
     return {
         /**
          * This can only be done by the logged in user.
+         * @summary Get BlogPosts by id
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBlogPost(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BlogPostByIdResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).getBlogPost(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all Announcements
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -491,6 +628,19 @@ export const MediaApiFp = function(configuration?: Configuration) {
          */
         async listBlogPostsSummaries(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BlogPostSummariesResponse>> {
             const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).listBlogPostsSummaries(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get all BlogPosts bookmarked by user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listBookmarkedBlogPosts(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookmarkedBlogPostsResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).listBookmarkedBlogPosts(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -579,6 +729,21 @@ export const MediaApiFp = function(configuration?: Configuration) {
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Like a blog post
+         * @param {string} id blog id
+         * @param {BookmarkRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async setBlogBookmarkStatus(id: string, body?: BookmarkRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SetBlogBookmarkResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).setBlogBookmarkStatus(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Like a blog post comment
          * @param {string} id comment id
          * @param {LikeRequest} [body] request params
@@ -618,6 +783,16 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * This can only be done by the logged in user.
+         * @summary Get BlogPosts by id
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBlogPost(id: string, options?: any): AxiosPromise<BlogPostByIdResponse> {
+            return MediaApiFp(configuration).getBlogPost(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all Announcements
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -642,6 +817,15 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
          */
         listBlogPostsSummaries(options?: any): AxiosPromise<BlogPostSummariesResponse> {
             return MediaApiFp(configuration).listBlogPostsSummaries(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get all BlogPosts bookmarked by user
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listBookmarkedBlogPosts(options?: any): AxiosPromise<BookmarkedBlogPostsResponse> {
+            return MediaApiFp(configuration).listBookmarkedBlogPosts(options).then((request) => request(axios, basePath));
         },
         /**
          * This can only be done by the logged in user.
@@ -702,6 +886,17 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Like a blog post
+         * @param {string} id blog id
+         * @param {BookmarkRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        setBlogBookmarkStatus(id: string, body?: BookmarkRequest, options?: any): AxiosPromise<SetBlogBookmarkResponse> {
+            return MediaApiFp(configuration).setBlogBookmarkStatus(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Like a blog post comment
          * @param {string} id comment id
          * @param {LikeRequest} [body] request params
@@ -734,6 +929,17 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
 export class MediaApi extends BaseAPI {
     /**
      * This can only be done by the logged in user.
+     * @summary Get BlogPosts by id
+     * @param {string} id blog id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public getBlogPost(id: string, options?: any) {
+        return MediaApiFp(this.configuration).getBlogPost(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
      * @summary Get all Announcements
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -761,6 +967,16 @@ export class MediaApi extends BaseAPI {
      */
     public listBlogPostsSummaries(options?: any) {
         return MediaApiFp(this.configuration).listBlogPostsSummaries(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Get all BlogPosts bookmarked by user
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public listBookmarkedBlogPosts(options?: any) {
+        return MediaApiFp(this.configuration).listBookmarkedBlogPosts(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
@@ -824,6 +1040,18 @@ export class MediaApi extends BaseAPI {
      */
     public postComment(id: string, body?: CommentOnBlogRequest, options?: any) {
         return MediaApiFp(this.configuration).postComment(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Like a blog post
+     * @param {string} id blog id
+     * @param {BookmarkRequest} [body] request params
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public setBlogBookmarkStatus(id: string, body?: BookmarkRequest, options?: any) {
+        return MediaApiFp(this.configuration).setBlogBookmarkStatus(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
