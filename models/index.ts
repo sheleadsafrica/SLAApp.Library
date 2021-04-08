@@ -55,6 +55,7 @@ export * from './change-pin';
 export * from './change-pinresponse';
 export * from './complete-verification';
 export * from './complete-verification-response';
+export * from './daily-rate';
 export * from './delete-bank-account-account-response';
 export * from './delete-card-response';
 export * from './deposit-request';

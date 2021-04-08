@@ -40,23 +40,23 @@ export interface ChallengeCreationRequest {
      * @type {string}
      * @memberof ChallengeCreationRequest
      */
-    fundsInvested?: any | null;
+    fundsInvested: any;
     /**
      * 
      * @type {string}
      * @memberof ChallengeCreationRequest
      */
-    description?: any | null;
+    description: any;
     /**
      * 
      * @type {string}
      * @memberof ChallengeCreationRequest
      */
-    imageUrl?: any | null;
+    imageUrl: any;
     /**
      * 
      * @type {number}
      * @memberof ChallengeCreationRequest
      */
-    incomePercentage?: any;
+    incomePercentage: any;
 }

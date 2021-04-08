@@ -14,31 +14,31 @@
 /**
  * 
  * @export
- * @interface BlogPostCreationRequest
+ * @interface DailyRate
  */
-export interface BlogPostCreationRequest {
+export interface DailyRate {
     /**
      * 
      * @type {string}
-     * @memberof BlogPostCreationRequest
+     * @memberof DailyRate
      */
-    url: any;
+    id?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DailyRate
+     */
+    investmentId?: any | null;
     /**
      * 
      * @type {number}
-     * @memberof BlogPostCreationRequest
+     * @memberof DailyRate
      */
-    start: any;
+    date?: any;
     /**
      * 
-     * @type {string}
-     * @memberof BlogPostCreationRequest
+     * @type {number}
+     * @memberof DailyRate
      */
-    category: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof BlogPostCreationRequest
-     */
-    isFeatured: any;
+    interest?: any;
 }

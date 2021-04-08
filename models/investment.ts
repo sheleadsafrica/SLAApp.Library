@@ -65,4 +65,10 @@ export interface Investment {
      * @memberof Investment
      */
     imageUrl?: any | null;
+    /**
+     * 
+     * @type {Array&lt;DailyRate&gt;}
+     * @memberof Investment
+     */
+    rates?: any | null;
 }

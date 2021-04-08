@@ -29,4 +29,16 @@ export interface BlogPostUpdateRequest {
      * @memberof BlogPostUpdateRequest
      */
     start: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof BlogPostUpdateRequest
+     */
+    category: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BlogPostUpdateRequest
+     */
+    isFeatured: any;
 }

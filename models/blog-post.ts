@@ -43,6 +43,18 @@ export interface BlogPost {
     url?: any | null;
     /**
      * 
+     * @type {string}
+     * @memberof BlogPost
+     */
+    category?: any | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BlogPost
+     */
+    isFeatured?: any;
+    /**
+     * 
      * @type {Array&lt;BlogComment&gt;}
      * @memberof BlogPost
      */
