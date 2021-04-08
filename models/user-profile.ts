@@ -22,6 +22,12 @@ export interface UserProfile {
      * @type {string}
      * @memberof UserProfile
      */
+    id?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProfile
+     */
     name?: any | null;
     /**
      * 
