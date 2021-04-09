@@ -87,7 +87,6 @@ export * from './finance-profile';
 export * from './flutterwave-customer';
 export * from './flutterwave-webhook';
 export * from './flutterwave-webhook-data';
-export * from './get-user-profiles-from-list-request';
 export * from './get-user-profiles-from-list-response';
 export * from './goal-frequency';
 export * from './goal-tag';

@@ -19,7 +19,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { ChangePIN } from '../models';
 import { ChangePINResponse } from '../models';
 import { FinanceDetailsByIdResponse } from '../models';
-import { GetUserProfilesFromListRequest } from '../models';
 import { GetUserProfilesFromListResponse } from '../models';
 import { PinByIdResponse } from '../models';
 import { ProblemDetails } from '../models';
@@ -106,11 +105,11 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {GetUserProfilesFromListRequest} [body] 
+         * @param {string} [ids] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserProfiles: async (body?: GetUserProfilesFromListRequest, options: any = {}): Promise<RequestArgs> => {
+        getUserProfiles: async (ids?: string, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/directory`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -122,7 +121,9 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+            if (ids !== undefined) {
+                localVarQueryParameter['ids'] = ids;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -134,8 +135,6 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -409,12 +408,12 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {GetUserProfilesFromListRequest} [body] 
+         * @param {string} [ids] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserProfiles(body?: GetUserProfilesFromListRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetUserProfilesFromListResponse>> {
-            const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).getUserProfiles(body, options);
+        async getUserProfiles(ids?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetUserProfilesFromListResponse>> {
+            const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).getUserProfiles(ids, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -525,12 +524,12 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {GetUserProfilesFromListRequest} [body] 
+         * @param {string} [ids] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserProfiles(body?: GetUserProfilesFromListRequest, options?: any): AxiosPromise<GetUserProfilesFromListResponse> {
-            return UserApiFp(configuration).getUserProfiles(body, options).then((request) => request(axios, basePath));
+        getUserProfiles(ids?: string, options?: any): AxiosPromise<GetUserProfilesFromListResponse> {
+            return UserApiFp(configuration).getUserProfiles(ids, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -616,13 +615,13 @@ export class UserApi extends BaseAPI {
     }
     /**
      * 
-     * @param {GetUserProfilesFromListRequest} [body] 
+     * @param {string} [ids] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getUserProfiles(body?: GetUserProfilesFromListRequest, options?: any) {
-        return UserApiFp(this.configuration).getUserProfiles(body, options).then((request) => request(this.axios, this.basePath));
+    public getUserProfiles(ids?: string, options?: any) {
+        return UserApiFp(this.configuration).getUserProfiles(ids, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
