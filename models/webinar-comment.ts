@@ -14,43 +14,37 @@
 /**
  * 
  * @export
- * @interface WebinarPostUpdateRequest
+ * @interface WebinarComment
  */
-export interface WebinarPostUpdateRequest {
+export interface WebinarComment {
     /**
      * 
      * @type {string}
-     * @memberof WebinarPostUpdateRequest
+     * @memberof WebinarComment
      */
-    title: any;
+    id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof WebinarPostUpdateRequest
+     * @memberof WebinarComment
      */
-    body: any;
+    webinarPostId?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof WebinarPostUpdateRequest
+     * @memberof WebinarComment
      */
-    videoUrl: any;
+    userId?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WebinarComment
+     */
+    body?: any | null;
     /**
      * 
      * @type {number}
-     * @memberof WebinarPostUpdateRequest
+     * @memberof WebinarComment
      */
-    start: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof WebinarPostUpdateRequest
-     */
-    category: any;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof WebinarPostUpdateRequest
-     */
-    isFeatured: any;
+    created?: any;
 }

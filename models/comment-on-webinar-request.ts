@@ -14,19 +14,19 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface CommentOnWebinarRequest
  */
-export interface CommentOnBlogRequest {
+export interface CommentOnWebinarRequest {
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof CommentOnWebinarRequest
      */
     id: any;
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof CommentOnWebinarRequest
      */
     body: any;
 }

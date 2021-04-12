@@ -14,19 +14,7 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface CommentOnWebinarResponse
  */
-export interface CommentOnBlogRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
-     */
-    id: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
-     */
-    body: any;
+export interface CommentOnWebinarResponse {
 }

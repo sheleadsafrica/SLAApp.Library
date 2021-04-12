@@ -14,19 +14,13 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface SetWebinarBookmarkResponse
  */
-export interface CommentOnBlogRequest {
+export interface SetWebinarBookmarkResponse {
     /**
      * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @type {boolean}
+     * @memberof SetWebinarBookmarkResponse
      */
-    id: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
-     */
-    body: any;
+    bookmarked?: any;
 }

@@ -14,19 +14,25 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface WebinarLike
  */
-export interface CommentOnBlogRequest {
+export interface WebinarLike {
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof WebinarLike
      */
-    id: any;
+    id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof WebinarLike
      */
-    body: any;
+    webinarPostId?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WebinarLike
+     */
+    userId?: any | null;
 }

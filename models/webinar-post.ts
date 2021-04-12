@@ -59,4 +59,28 @@ export interface WebinarPost {
      * @memberof WebinarPost
      */
     videoUrl?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WebinarPost
+     */
+    category?: any | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WebinarPost
+     */
+    isFeatured?: any;
+    /**
+     * 
+     * @type {Array&lt;WebinarComment&gt;}
+     * @memberof WebinarPost
+     */
+    comments?: any | null;
+    /**
+     * 
+     * @type {Array&lt;WebinarLike&gt;}
+     * @memberof WebinarPost
+     */
+    likes?: any | null;
 }

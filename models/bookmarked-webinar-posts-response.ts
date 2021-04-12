@@ -14,19 +14,13 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface BookmarkedWebinarPostsResponse
  */
-export interface CommentOnBlogRequest {
+export interface BookmarkedWebinarPostsResponse {
     /**
      * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @type {Array&lt;WebinarBookmark&gt;}
+     * @memberof BookmarkedWebinarPostsResponse
      */
-    id: any;
-    /**
-     * 
-     * @type {string}
-     * @memberof CommentOnBlogRequest
-     */
-    body: any;
+    bookmarks?: any | null;
 }

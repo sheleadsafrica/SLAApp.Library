@@ -14,19 +14,25 @@
 /**
  * 
  * @export
- * @interface CommentOnBlogRequest
+ * @interface WebinarBookmark
  */
-export interface CommentOnBlogRequest {
+export interface WebinarBookmark {
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof WebinarBookmark
      */
-    id: any;
+    id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof CommentOnBlogRequest
+     * @memberof WebinarBookmark
      */
-    body: any;
+    webinarPostId?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WebinarBookmark
+     */
+    userId?: any | null;
 }

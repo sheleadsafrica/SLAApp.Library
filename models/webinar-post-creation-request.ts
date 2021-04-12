@@ -47,4 +47,16 @@ export interface WebinarPostCreationRequest {
      * @memberof WebinarPostCreationRequest
      */
     start: any;
+    /**
+     * 
+     * @type {string}
+     * @memberof WebinarPostCreationRequest
+     */
+    category: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WebinarPostCreationRequest
+     */
+    isFeatured: any;
 }
