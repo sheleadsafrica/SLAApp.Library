@@ -161,6 +161,7 @@ export * from './webinar-bookmark';
 export * from './webinar-comment';
 export * from './webinar-like';
 export * from './webinar-post';
+export * from './webinar-post-by-id-response';
 export * from './webinar-post-creation-request';
 export * from './webinar-post-creation-response';
 export * from './webinar-post-update-request';

@@ -36,6 +36,7 @@ import { SetBlogBookmarkResponse } from '../models';
 import { SetBlogLikeResponse } from '../models';
 import { SetCommentLikeResponse } from '../models';
 import { SetWebinarBookmarkResponse } from '../models';
+import { WebinarPostByIdResponse } from '../models';
 import { WebinarPostsFullResponse } from '../models';
 /**
  * MediaApi - axios parameter creator
@@ -56,6 +57,46 @@ export const MediaApiAxiosParamCreator = function (configuration?: Configuration
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getBlogPost.');
             }
             const localVarPath = `/media/blog/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get WebinarPost by id
+         * @param {string} id webinar id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWebinarPost: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getWebinarPost.');
+            }
+            const localVarPath = `/media/webinar/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -724,6 +765,20 @@ export const MediaApiFp = function(configuration?: Configuration) {
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Get WebinarPost by id
+         * @param {string} id webinar id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getWebinarPost(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebinarPostByIdResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).getWebinarPost(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all Announcements
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -964,6 +1019,16 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Get WebinarPost by id
+         * @param {string} id webinar id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getWebinarPost(id: string, options?: any): AxiosPromise<WebinarPostByIdResponse> {
+            return MediaApiFp(configuration).getWebinarPost(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all Announcements
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1139,6 +1204,17 @@ export class MediaApi extends BaseAPI {
      */
     public getBlogPost(id: string, options?: any) {
         return MediaApiFp(this.configuration).getBlogPost(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Get WebinarPost by id
+     * @param {string} id webinar id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public getWebinarPost(id: string, options?: any) {
+        return MediaApiFp(this.configuration).getWebinarPost(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
