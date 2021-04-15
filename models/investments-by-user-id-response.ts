@@ -14,13 +14,13 @@
 /**
  * 
  * @export
- * @interface ListUsersResponse
+ * @interface InvestmentsByUserIdResponse
  */
-export interface ListUsersResponse {
+export interface InvestmentsByUserIdResponse {
     /**
      * 
-     * @type {Array&lt;AggregatedUserData&gt;}
-     * @memberof ListUsersResponse
+     * @type {Array&lt;string&gt;}
+     * @memberof InvestmentsByUserIdResponse
      */
-    users?: any | null;
+    investments?: any | null;
 }

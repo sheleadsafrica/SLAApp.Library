@@ -77,4 +77,10 @@ export interface User {
      * @memberof User
      */
     nickname?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    profilePicture?: any | null;
 }
