@@ -64,6 +64,7 @@ import { StashCreationRequest } from '../models';
 import { StashCreationResponse } from '../models';
 import { StashUpdateRequest } from '../models';
 import { StashUpdateResponse } from '../models';
+import { TransactionsByUserIdResponse } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
 import { WebinarPostUpdateRequest } from '../models';
@@ -935,6 +936,45 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          */
         listCustomers: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/user/admin/customers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listUserTransactions: async (userId: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            if (userId === null || userId === undefined) {
+                throw new RequiredError('userId','Required parameter userId was null or undefined when calling listUserTransactions.');
+            }
+            const localVarPath = `/portfolio/admin/transactions/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1861,6 +1901,19 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listUserTransactions(userId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TransactionsByUserIdResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).listUserTransactions(userId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {AchievementUpdateRequest} [body] 
          * @param {*} [options] Override http request option.
@@ -2278,6 +2331,15 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {string} userId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listUserTransactions(userId: string, options?: any): AxiosPromise<TransactionsByUserIdResponse> {
+            return AdminApiFp(configuration).listUserTransactions(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {AchievementUpdateRequest} [body] 
          * @param {*} [options] Override http request option.
@@ -2664,6 +2726,16 @@ export class AdminApi extends BaseAPI {
      */
     public listCustomers(options?: any) {
         return AdminApiFp(this.configuration).listCustomers(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} userId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public listUserTransactions(userId: string, options?: any) {
+        return AdminApiFp(this.configuration).listUserTransactions(userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

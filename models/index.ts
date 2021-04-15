@@ -143,6 +143,7 @@ export * from './traits';
 export * from './transaction';
 export * from './transaction-status';
 export * from './transaction-summary';
+export * from './transactions-by-user-id-response';
 export * from './update-finance';
 export * from './update-finance-response';
 export * from './update-password';
