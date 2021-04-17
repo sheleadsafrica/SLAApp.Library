@@ -156,6 +156,7 @@ export * from './update-password-response';
 export * from './update-profile';
 export * from './update-profile-picture-response';
 export * from './update-profile-response';
+export * from './update-push-token-response';
 export * from './update-security-question';
 export * from './update-security-question-response';
 export * from './user';
