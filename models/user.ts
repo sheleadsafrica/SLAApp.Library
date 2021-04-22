@@ -83,4 +83,10 @@ export interface User {
      * @memberof User
      */
     profilePicture?: any | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof User
+     */
+    created?: any;
 }

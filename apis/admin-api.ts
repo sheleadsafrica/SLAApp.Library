@@ -60,12 +60,14 @@ import { MoneyTipCreationRequest } from '../models';
 import { MoneyTipCreationResponse } from '../models';
 import { MoneyTipUpdateRequest } from '../models';
 import { MoneyTipUpdateResponse } from '../models';
+import { PortfolioAnalyticsResponse } from '../models';
 import { ProblemDetails } from '../models';
 import { StashCreationRequest } from '../models';
 import { StashCreationResponse } from '../models';
 import { StashUpdateRequest } from '../models';
 import { StashUpdateResponse } from '../models';
 import { TransactionsByUserIdResponse } from '../models';
+import { UserAnalyticsResponse } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
 import { WebinarPostUpdateRequest } from '../models';
@@ -1043,6 +1045,39 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        portfolioAnalytics: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/admin/analytics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {AchievementUpdateRequest} [body] 
          * @param {*} [options] Override http request option.
@@ -1619,6 +1654,39 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userAnalytics: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/admin/analytics`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1967,6 +2035,18 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async portfolioAnalytics(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioAnalyticsResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).portfolioAnalytics(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {AchievementUpdateRequest} [body] 
          * @param {*} [options] Override http request option.
@@ -2149,6 +2229,18 @@ export const AdminApiFp = function(configuration?: Configuration) {
          */
         async uploadFile(file?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).uploadFile(file, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userAnalytics(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserAnalyticsResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).userAnalytics(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2402,6 +2494,14 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        portfolioAnalytics(options?: any): AxiosPromise<PortfolioAnalyticsResponse> {
+            return AdminApiFp(configuration).portfolioAnalytics(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {AchievementUpdateRequest} [body] 
          * @param {*} [options] Override http request option.
@@ -2536,6 +2636,14 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         uploadFile(file?: string, options?: any): AxiosPromise<FileUploadResponse> {
             return AdminApiFp(configuration).uploadFile(file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userAnalytics(options?: any): AxiosPromise<UserAnalyticsResponse> {
+            return AdminApiFp(configuration).userAnalytics(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2811,6 +2919,15 @@ export class AdminApi extends BaseAPI {
     }
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public portfolioAnalytics(options?: any) {
+        return AdminApiFp(this.configuration).portfolioAnalytics(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {string} id 
      * @param {AchievementUpdateRequest} [body] 
      * @param {*} [options] Override http request option.
@@ -2958,5 +3075,14 @@ export class AdminApi extends BaseAPI {
      */
     public uploadFile(file?: string, options?: any) {
         return AdminApiFp(this.configuration).uploadFile(file, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public userAnalytics(options?: any) {
+        return AdminApiFp(this.configuration).userAnalytics(options).then((request) => request(this.axios, this.basePath));
     }
 }
