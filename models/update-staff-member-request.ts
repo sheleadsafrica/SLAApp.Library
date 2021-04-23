@@ -14,19 +14,25 @@
 /**
  * 
  * @export
- * @interface UpdateStaffActiveStateRequest
+ * @interface UpdateStaffMemberRequest
  */
-export interface UpdateStaffActiveStateRequest {
+export interface UpdateStaffMemberRequest {
     /**
      * 
      * @type {string}
-     * @memberof UpdateStaffActiveStateRequest
+     * @memberof UpdateStaffMemberRequest
      */
     id?: any | null;
     /**
      * 
      * @type {boolean}
-     * @memberof UpdateStaffActiveStateRequest
+     * @memberof UpdateStaffMemberRequest
      */
     active?: any;
+    /**
+     * 
+     * @type {StaffRole}
+     * @memberof UpdateStaffMemberRequest
+     */
+    role?: any;
 }

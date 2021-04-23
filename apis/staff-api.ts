@@ -21,10 +21,8 @@ import { ProblemDetails } from '../models';
 import { SetProfilePictureRequest } from '../models';
 import { SetProfilePictureResponse } from '../models';
 import { StaffByIdResponse } from '../models';
-import { UpdateStaffActiveStateRequest } from '../models';
-import { UpdateStaffActiveStateResponse } from '../models';
-import { UpdateStaffRoleRequest } from '../models';
-import { UpdateStaffRoleResponse } from '../models';
+import { UpdateStaffMemberRequest } from '../models';
+import { UpdateStaffMemberResponse } from '../models';
 /**
  * StaffApi - axios parameter creator
  * @export
@@ -42,7 +40,7 @@ export const StaffApiAxiosParamCreator = function (configuration?: Configuration
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getStaffMember.');
             }
-            const localVarPath = `/staff/staff/{id}`
+            const localVarPath = `/staff/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -144,60 +142,16 @@ export const StaffApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {string} id 
-         * @param {UpdateStaffActiveStateRequest} [body] 
+         * @param {UpdateStaffMemberRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateStaffActiveState: async (id: string, body?: UpdateStaffActiveStateRequest, options: any = {}): Promise<RequestArgs> => {
+        updateStaffActiveState: async (id: string, body?: UpdateStaffMemberRequest, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling updateStaffActiveState.');
             }
-            const localVarPath = `/staff/staff/{id}/active`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateStaffRoleRequest} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateStaffRole: async (id: string, body?: UpdateStaffRoleRequest, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling updateStaffRole.');
-            }
-            const localVarPath = `/staff/staff/{id}/role`
+            const localVarPath = `/staff/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -279,26 +233,12 @@ export const StaffApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {UpdateStaffActiveStateRequest} [body] 
+         * @param {UpdateStaffMemberRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateStaffActiveState(id: string, body?: UpdateStaffActiveStateRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateStaffActiveStateResponse>> {
+        async updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateStaffMemberResponse>> {
             const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateStaffActiveState(id, body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateStaffRoleRequest} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async updateStaffRole(id: string, body?: UpdateStaffRoleRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateStaffRoleResponse>> {
-            const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateStaffRole(id, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -342,22 +282,12 @@ export const StaffApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {string} id 
-         * @param {UpdateStaffActiveStateRequest} [body] 
+         * @param {UpdateStaffMemberRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateStaffActiveState(id: string, body?: UpdateStaffActiveStateRequest, options?: any): AxiosPromise<UpdateStaffActiveStateResponse> {
+        updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any): AxiosPromise<UpdateStaffMemberResponse> {
             return StaffApiFp(configuration).updateStaffActiveState(id, body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {UpdateStaffRoleRequest} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        updateStaffRole(id: string, body?: UpdateStaffRoleRequest, options?: any): AxiosPromise<UpdateStaffRoleResponse> {
-            return StaffApiFp(configuration).updateStaffRole(id, body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -401,23 +331,12 @@ export class StaffApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
-     * @param {UpdateStaffActiveStateRequest} [body] 
+     * @param {UpdateStaffMemberRequest} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof StaffApi
      */
-    public updateStaffActiveState(id: string, body?: UpdateStaffActiveStateRequest, options?: any) {
+    public updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any) {
         return StaffApiFp(this.configuration).updateStaffActiveState(id, body, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * 
-     * @param {string} id 
-     * @param {UpdateStaffRoleRequest} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StaffApi
-     */
-    public updateStaffRole(id: string, body?: UpdateStaffRoleRequest, options?: any) {
-        return StaffApiFp(this.configuration).updateStaffRole(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }

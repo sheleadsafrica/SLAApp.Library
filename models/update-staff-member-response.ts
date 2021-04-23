@@ -14,7 +14,7 @@
 /**
  * 
  * @export
- * @interface UpdateStaffActiveStateResponse
+ * @interface UpdateStaffMemberResponse
  */
-export interface UpdateStaffActiveStateResponse {
+export interface UpdateStaffMemberResponse {
 }
