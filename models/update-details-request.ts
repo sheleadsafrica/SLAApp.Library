@@ -14,7 +14,19 @@
 /**
  * 
  * @export
- * @interface SetProfilePictureResponse
+ * @interface UpdateDetailsRequest
  */
-export interface SetProfilePictureResponse {
+export interface UpdateDetailsRequest {
+    /**
+     * 
+     * @type {Identity}
+     * @memberof UpdateDetailsRequest
+     */
+    identity?: any;
+    /**
+     * 
+     * @type {UserInfo}
+     * @memberof UpdateDetailsRequest
+     */
+    info?: any;
 }

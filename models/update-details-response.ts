@@ -14,19 +14,7 @@
 /**
  * 
  * @export
- * @interface SetProfilePictureRequest
+ * @interface UpdateDetailsResponse
  */
-export interface SetProfilePictureRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof SetProfilePictureRequest
-     */
-    id?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof SetProfilePictureRequest
-     */
-    profileUrl?: any | null;
+export interface UpdateDetailsResponse {
 }
