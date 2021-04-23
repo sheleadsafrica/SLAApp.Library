@@ -146,10 +146,10 @@ export const StaffApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateStaffActiveState: async (id: string, body?: UpdateStaffMemberRequest, options: any = {}): Promise<RequestArgs> => {
+        updateStaffMember: async (id: string, body?: UpdateStaffMemberRequest, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling updateStaffActiveState.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateStaffMember.');
             }
             const localVarPath = `/staff/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -237,8 +237,8 @@ export const StaffApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateStaffMemberResponse>> {
-            const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateStaffActiveState(id, body, options);
+        async updateStaffMember(id: string, body?: UpdateStaffMemberRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateStaffMemberResponse>> {
+            const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateStaffMember(id, body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -286,8 +286,8 @@ export const StaffApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any): AxiosPromise<UpdateStaffMemberResponse> {
-            return StaffApiFp(configuration).updateStaffActiveState(id, body, options).then((request) => request(axios, basePath));
+        updateStaffMember(id: string, body?: UpdateStaffMemberRequest, options?: any): AxiosPromise<UpdateStaffMemberResponse> {
+            return StaffApiFp(configuration).updateStaffMember(id, body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -336,7 +336,7 @@ export class StaffApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StaffApi
      */
-    public updateStaffActiveState(id: string, body?: UpdateStaffMemberRequest, options?: any) {
-        return StaffApiFp(this.configuration).updateStaffActiveState(id, body, options).then((request) => request(this.axios, this.basePath));
+    public updateStaffMember(id: string, body?: UpdateStaffMemberRequest, options?: any) {
+        return StaffApiFp(this.configuration).updateStaffMember(id, body, options).then((request) => request(this.axios, this.basePath));
     }
 }
