@@ -107,7 +107,7 @@ export const StaffApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfileImage: async (body?: UpdateDetailsRequest, options: any = {}): Promise<RequestArgs> => {
+        updateDetails: async (body?: UpdateDetailsRequest, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/staff/staff/profile-image`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -223,8 +223,8 @@ export const StaffApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateProfileImage(body?: UpdateDetailsRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateDetailsResponse>> {
-            const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateProfileImage(body, options);
+        async updateDetails(body?: UpdateDetailsRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateDetailsResponse>> {
+            const localVarAxiosArgs = await StaffApiAxiosParamCreator(configuration).updateDetails(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -276,8 +276,8 @@ export const StaffApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateProfileImage(body?: UpdateDetailsRequest, options?: any): AxiosPromise<UpdateDetailsResponse> {
-            return StaffApiFp(configuration).updateProfileImage(body, options).then((request) => request(axios, basePath));
+        updateDetails(body?: UpdateDetailsRequest, options?: any): AxiosPromise<UpdateDetailsResponse> {
+            return StaffApiFp(configuration).updateDetails(body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -325,8 +325,8 @@ export class StaffApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof StaffApi
      */
-    public updateProfileImage(body?: UpdateDetailsRequest, options?: any) {
-        return StaffApiFp(this.configuration).updateProfileImage(body, options).then((request) => request(this.axios, this.basePath));
+    public updateDetails(body?: UpdateDetailsRequest, options?: any) {
+        return StaffApiFp(this.configuration).updateDetails(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
