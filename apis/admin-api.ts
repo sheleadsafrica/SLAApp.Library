@@ -73,6 +73,8 @@ import { StashUpdateResponse } from '../models';
 import { TransactionsByUserIdResponse } from '../models';
 import { UpdateTodo } from '../models';
 import { UpdateTodoResponse } from '../models';
+import { UpsertDailyRate } from '../models';
+import { UpsertDailyRateResponse } from '../models';
 import { UserAnalyticsResponse } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
@@ -1845,6 +1847,50 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {string} id 
+         * @param {UpsertDailyRate} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        upsertInvestmentRate: async (id: string, body?: UpsertDailyRate, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling upsertInvestmentRate.');
+            }
+            const localVarPath = `/portfolio/admin/investment/{id}/rate`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2483,6 +2529,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} id 
+         * @param {UpsertDailyRate} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async upsertInvestmentRate(id: string, body?: UpsertDailyRate, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpsertDailyRateResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).upsertInvestmentRate(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2925,6 +2985,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         uploadFile(file?: string, options?: any): AxiosPromise<FileUploadResponse> {
             return AdminApiFp(configuration).uploadFile(file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpsertDailyRate} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        upsertInvestmentRate(id: string, body?: UpsertDailyRate, options?: any): AxiosPromise<UpsertDailyRateResponse> {
+            return AdminApiFp(configuration).upsertInvestmentRate(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3410,6 +3480,17 @@ export class AdminApi extends BaseAPI {
      */
     public uploadFile(file?: string, options?: any) {
         return AdminApiFp(this.configuration).uploadFile(file, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpsertDailyRate} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public upsertInvestmentRate(id: string, body?: UpsertDailyRate, options?: any) {
+        return AdminApiFp(this.configuration).upsertInvestmentRate(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

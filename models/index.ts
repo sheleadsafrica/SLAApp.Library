@@ -183,6 +183,8 @@ export * from './update-staff-member-request';
 export * from './update-staff-member-response';
 export * from './update-todo';
 export * from './update-todo-response';
+export * from './upsert-daily-rate';
+export * from './upsert-daily-rate-response';
 export * from './user';
 export * from './user-analytics-response';
 export * from './user-profile';
