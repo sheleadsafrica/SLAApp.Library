@@ -28,6 +28,12 @@ export interface AggregatedStaffData {
      * @type {string}
      * @memberof AggregatedStaffData
      */
+    email?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AggregatedStaffData
+     */
     firstName?: any | null;
     /**
      * 
