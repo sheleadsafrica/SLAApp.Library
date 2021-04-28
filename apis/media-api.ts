@@ -36,6 +36,7 @@ import { SetBlogBookmarkResponse } from '../models';
 import { SetBlogLikeResponse } from '../models';
 import { SetCommentLikeResponse } from '../models';
 import { SetWebinarBookmarkResponse } from '../models';
+import { UpdateBlogReadCountResponse } from '../models';
 import { WebinarPostByIdResponse } from '../models';
 import { WebinarPostsFullResponse } from '../models';
 /**
@@ -740,6 +741,46 @@ export const MediaApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Update blog read count
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateBlogReadCount: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateBlogReadCount.');
+            }
+            const localVarPath = `/media/blog/{id}/read`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -998,6 +1039,20 @@ export const MediaApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Update blog read count
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateBlogReadCount(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateBlogReadCountResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).updateBlogReadCount(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -1183,6 +1238,16 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
          */
         setWebinarBookmarkStatus(id: string, body?: BookmarkRequest, options?: any): AxiosPromise<SetWebinarBookmarkResponse> {
             return MediaApiFp(configuration).setWebinarBookmarkStatus(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Update blog read count
+         * @param {string} id blog id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateBlogReadCount(id: string, options?: any): AxiosPromise<UpdateBlogReadCountResponse> {
+            return MediaApiFp(configuration).updateBlogReadCount(id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1388,5 +1453,16 @@ export class MediaApi extends BaseAPI {
      */
     public setWebinarBookmarkStatus(id: string, body?: BookmarkRequest, options?: any) {
         return MediaApiFp(this.configuration).setWebinarBookmarkStatus(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Update blog read count
+     * @param {string} id blog id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public updateBlogReadCount(id: string, options?: any) {
+        return MediaApiFp(this.configuration).updateBlogReadCount(id, options).then((request) => request(this.axios, this.basePath));
     }
 }

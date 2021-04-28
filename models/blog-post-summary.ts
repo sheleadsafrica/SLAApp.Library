@@ -65,4 +65,10 @@ export interface BlogPostSummary {
      * @memberof BlogPostSummary
      */
     likes?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof BlogPostSummary
+     */
+    reads?: any;
 }

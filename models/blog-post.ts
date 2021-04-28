@@ -65,4 +65,10 @@ export interface BlogPost {
      * @memberof BlogPost
      */
     likes?: any | null;
+    /**
+     * 
+     * @type {Array&lt;BlogRead&gt;}
+     * @memberof BlogPost
+     */
+    reads?: any | null;
 }
