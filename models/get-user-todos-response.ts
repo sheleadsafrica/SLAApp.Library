@@ -14,7 +14,13 @@
 /**
  * 
  * @export
- * @interface UpdateDetailsResponse
+ * @interface GetUserTodosResponse
  */
-export interface UpdateDetailsResponse {
+export interface GetUserTodosResponse {
+    /**
+     * 
+     * @type {Array&lt;Todo&gt;}
+     * @memberof GetUserTodosResponse
+     */
+    todos?: any | null;
 }

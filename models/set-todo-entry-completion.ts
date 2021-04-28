@@ -14,19 +14,19 @@
 /**
  * 
  * @export
- * @interface UpdateDetailsRequest
+ * @interface SetTodoEntryCompletion
  */
-export interface UpdateDetailsRequest {
+export interface SetTodoEntryCompletion {
     /**
      * 
-     * @type {Identity}
-     * @memberof UpdateDetailsRequest
+     * @type {string}
+     * @memberof SetTodoEntryCompletion
      */
-    identity?: any;
+    id?: any;
     /**
      * 
-     * @type {UserInfo}
-     * @memberof UpdateDetailsRequest
+     * @type {boolean}
+     * @memberof SetTodoEntryCompletion
      */
-    info?: any;
+    completed?: any;
 }

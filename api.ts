@@ -18,5 +18,6 @@ export * from './apis/payments-api-api';
 export * from './apis/portfolio-api';
 export * from './apis/registration-api';
 export * from './apis/staff-api';
+export * from './apis/todo-api-api';
 export * from './apis/user-api';
 

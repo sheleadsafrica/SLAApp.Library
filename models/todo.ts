@@ -14,43 +14,37 @@
 /**
  * 
  * @export
- * @interface UserInfo
+ * @interface Todo
  */
-export interface UserInfo {
+export interface Todo {
     /**
      * 
      * @type {string}
-     * @memberof UserInfo
+     * @memberof Todo
      */
-    id?: any;
+    id?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof UserInfo
+     * @memberof Todo
      */
-    firstName?: any | null;
+    text?: any | null;
     /**
      * 
-     * @type {string}
-     * @memberof UserInfo
+     * @type {boolean}
+     * @memberof Todo
      */
-    lastName?: any | null;
+    complete?: any;
     /**
      * 
-     * @type {string}
-     * @memberof UserInfo
+     * @type {number}
+     * @memberof Todo
      */
-    email?: any | null;
+    created?: any;
     /**
      * 
-     * @type {string}
-     * @memberof UserInfo
+     * @type {number}
+     * @memberof Todo
      */
-    currency?: any | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserInfo
-     */
-    country?: any | null;
+    lastUpdated?: any;
 }

@@ -33,6 +33,8 @@ import { ChallengeCreationResponse } from '../models';
 import { ChallengeUpdateRequest } from '../models';
 import { ChallengeUpdateResponse } from '../models';
 import { ChallengesResponse } from '../models';
+import { CreateTodo } from '../models';
+import { CreateTodoResponse } from '../models';
 import { FAQCreationRequest } from '../models';
 import { FAQCreationResponse } from '../models';
 import { FAQUpdateRequest } from '../models';
@@ -55,6 +57,7 @@ import { LegalDocumentCreationRequest } from '../models';
 import { LegalDocumentCreationResponse } from '../models';
 import { LegalDocumentUpdateRequest } from '../models';
 import { LegalDocumentUpdateResponse } from '../models';
+import { ListTodosResponse } from '../models';
 import { ListUsersResponse } from '../models';
 import { MoneyTipCreationRequest } from '../models';
 import { MoneyTipCreationResponse } from '../models';
@@ -62,11 +65,14 @@ import { MoneyTipUpdateRequest } from '../models';
 import { MoneyTipUpdateResponse } from '../models';
 import { PortfolioAnalyticsResponse } from '../models';
 import { ProblemDetails } from '../models';
+import { SearchCustomersResponse } from '../models';
 import { StashCreationRequest } from '../models';
 import { StashCreationResponse } from '../models';
 import { StashUpdateRequest } from '../models';
 import { StashUpdateResponse } from '../models';
 import { TransactionsByUserIdResponse } from '../models';
+import { UpdateTodo } from '../models';
+import { UpdateTodoResponse } from '../models';
 import { UserAnalyticsResponse } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
@@ -472,6 +478,44 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          */
         createStash: async (body?: StashCreationRequest, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/portfolio/admin/stash`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CreateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTodo: async (body?: CreateTodo, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/todo/admin/todo`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -967,6 +1011,39 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTodos: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/todo/admin/todos`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1059,6 +1136,74 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} [minAge] 
+         * @param {number} [maxAge] 
+         * @param {string} [monthlyEarnings] 
+         * @param {string} [maritalStatus] 
+         * @param {number} [minNumKids] 
+         * @param {number} [maxNumKids] 
+         * @param {string} [residenceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCustomers: async (minAge?: number, maxAge?: number, monthlyEarnings?: string, maritalStatus?: string, minNumKids?: number, maxNumKids?: number, residenceType?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/admin/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (minAge !== undefined) {
+                localVarQueryParameter['minAge'] = minAge;
+            }
+
+            if (maxAge !== undefined) {
+                localVarQueryParameter['maxAge'] = maxAge;
+            }
+
+            if (monthlyEarnings !== undefined) {
+                localVarQueryParameter['monthlyEarnings'] = monthlyEarnings;
+            }
+
+            if (maritalStatus !== undefined) {
+                localVarQueryParameter['maritalStatus'] = maritalStatus;
+            }
+
+            if (minNumKids !== undefined) {
+                localVarQueryParameter['minNumKids'] = minNumKids;
+            }
+
+            if (maxNumKids !== undefined) {
+                localVarQueryParameter['maxNumKids'] = maxNumKids;
+            }
+
+            if (residenceType !== undefined) {
+                localVarQueryParameter['residenceType'] = residenceType;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1567,6 +1712,50 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * 
+         * @param {string} id 
+         * @param {UpdateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTodo: async (id: string, body?: UpdateTodo, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateTodo.');
+            }
+            const localVarPath = `/todo/admin/todo/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
@@ -1846,6 +2035,19 @@ export const AdminApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {CreateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createTodo(body?: CreateTodo, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateTodoResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createTodo(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Create a new WebinarPost
          * @param {WebinarPostCreationRequest} [body] request values
@@ -2009,6 +2211,18 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTodos(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTodosResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).listTodos(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2040,6 +2254,25 @@ export const AdminApiFp = function(configuration?: Configuration) {
          */
         async portfolioAnalytics(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortfolioAnalyticsResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).portfolioAnalytics(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} [minAge] 
+         * @param {number} [maxAge] 
+         * @param {string} [monthlyEarnings] 
+         * @param {string} [maritalStatus] 
+         * @param {number} [minNumKids] 
+         * @param {number} [maxNumKids] 
+         * @param {string} [residenceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchCustomers(minAge?: number, maxAge?: number, monthlyEarnings?: string, maritalStatus?: string, minNumKids?: number, maxNumKids?: number, residenceType?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchCustomersResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).searchCustomers(minAge, maxAge, monthlyEarnings, maritalStatus, minNumKids, maxNumKids, residenceType, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2206,6 +2439,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {string} id 
+         * @param {UpdateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateTodo(id: string, body?: UpdateTodo, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateTodoResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).updateTodo(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
@@ -2361,6 +2608,15 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
             return AdminApiFp(configuration).createStash(body, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @param {CreateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createTodo(body?: CreateTodo, options?: any): AxiosPromise<CreateTodoResponse> {
+            return AdminApiFp(configuration).createTodo(body, options).then((request) => request(axios, basePath));
+        },
+        /**
          * This can only be done by the logged in user.
          * @summary Create a new WebinarPost
          * @param {WebinarPostCreationRequest} [body] request values
@@ -2476,6 +2732,14 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTodos(options?: any): AxiosPromise<ListTodosResponse> {
+            return AdminApiFp(configuration).listTodos(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2499,6 +2763,21 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         portfolioAnalytics(options?: any): AxiosPromise<PortfolioAnalyticsResponse> {
             return AdminApiFp(configuration).portfolioAnalytics(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [minAge] 
+         * @param {number} [maxAge] 
+         * @param {string} [monthlyEarnings] 
+         * @param {string} [maritalStatus] 
+         * @param {number} [minNumKids] 
+         * @param {number} [maxNumKids] 
+         * @param {string} [residenceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCustomers(minAge?: number, maxAge?: number, monthlyEarnings?: string, maritalStatus?: string, minNumKids?: number, maxNumKids?: number, residenceType?: string, options?: any): AxiosPromise<SearchCustomersResponse> {
+            return AdminApiFp(configuration).searchCustomers(minAge, maxAge, monthlyEarnings, maritalStatus, minNumKids, maxNumKids, residenceType, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2615,6 +2894,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         updateStash(id: string, body?: StashUpdateRequest, options?: any): AxiosPromise<StashUpdateResponse> {
             return AdminApiFp(configuration).updateStash(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateTodo} [body] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateTodo(id: string, body?: UpdateTodo, options?: any): AxiosPromise<UpdateTodoResponse> {
+            return AdminApiFp(configuration).updateTodo(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * This can only be done by the logged in user.
@@ -2772,6 +3061,16 @@ export class AdminApi extends BaseAPI {
         return AdminApiFp(this.configuration).createStash(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * 
+     * @param {CreateTodo} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public createTodo(body?: CreateTodo, options?: any) {
+        return AdminApiFp(this.configuration).createTodo(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * This can only be done by the logged in user.
      * @summary Create a new WebinarPost
      * @param {WebinarPostCreationRequest} [body] request values
@@ -2899,6 +3198,15 @@ export class AdminApi extends BaseAPI {
     }
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public listTodos(options?: any) {
+        return AdminApiFp(this.configuration).listTodos(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {string} userId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2925,6 +3233,22 @@ export class AdminApi extends BaseAPI {
      */
     public portfolioAnalytics(options?: any) {
         return AdminApiFp(this.configuration).portfolioAnalytics(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} [minAge] 
+     * @param {number} [maxAge] 
+     * @param {string} [monthlyEarnings] 
+     * @param {string} [maritalStatus] 
+     * @param {number} [minNumKids] 
+     * @param {number} [maxNumKids] 
+     * @param {string} [residenceType] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public searchCustomers(minAge?: number, maxAge?: number, monthlyEarnings?: string, maritalStatus?: string, minNumKids?: number, maxNumKids?: number, residenceType?: string, options?: any) {
+        return AdminApiFp(this.configuration).searchCustomers(minAge, maxAge, monthlyEarnings, maritalStatus, minNumKids, maxNumKids, residenceType, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
@@ -3052,6 +3376,17 @@ export class AdminApi extends BaseAPI {
      */
     public updateStash(id: string, body?: StashUpdateRequest, options?: any) {
         return AdminApiFp(this.configuration).updateStash(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateTodo} [body] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public updateTodo(id: string, body?: UpdateTodo, options?: any) {
+        return AdminApiFp(this.configuration).updateTodo(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
