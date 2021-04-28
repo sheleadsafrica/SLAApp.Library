@@ -1,6 +1,6 @@
 {
   "name": "@bridgelabsdesign/sla-platform-ts-client",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "OpenAPI client for SLA Platform",
   "author": "Eduardo Koloma Junior",
   "keywords": [

@@ -14,37 +14,49 @@
 /**
  * 
  * @export
- * @interface Transaction
+ * @interface TransactionData
  */
-export interface Transaction {
+export interface TransactionData {
     /**
      * 
      * @type {string}
-     * @memberof Transaction
+     * @memberof TransactionData
      */
     id?: any | null;
     /**
      * 
+     * @type {string}
+     * @memberof TransactionData
+     */
+    accountName?: any | null;
+    /**
+     * 
+     * @type {AccountType}
+     * @memberof TransactionData
+     */
+    accountType?: any;
+    /**
+     * 
      * @type {TransactionStatus}
-     * @memberof Transaction
+     * @memberof TransactionData
      */
     status?: any;
     /**
      * 
      * @type {number}
-     * @memberof Transaction
+     * @memberof TransactionData
      */
     transactionDate?: any;
     /**
      * 
      * @type {number}
-     * @memberof Transaction
+     * @memberof TransactionData
      */
     amount?: any;
     /**
      * 
      * @type {string}
-     * @memberof Transaction
+     * @memberof TransactionData
      */
     description?: any | null;
 }

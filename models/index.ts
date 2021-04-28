@@ -164,6 +164,7 @@ export * from './todo-admin-data';
 export * from './todo-criteria';
 export * from './traits';
 export * from './transaction';
+export * from './transaction-data';
 export * from './transaction-status';
 export * from './transaction-summary';
 export * from './transactions-by-user-id-response';

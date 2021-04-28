@@ -19,7 +19,7 @@
 export interface TransactionsByUserIdResponse {
     /**
      * 
-     * @type {Array&lt;Transaction&gt;}
+     * @type {Array&lt;TransactionData&gt;}
      * @memberof TransactionsByUserIdResponse
      */
     transactions?: any | null;
