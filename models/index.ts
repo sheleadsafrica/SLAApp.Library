@@ -113,6 +113,7 @@ export * from './investment';
 export * from './investment-by-id-response';
 export * from './investment-creation-request';
 export * from './investment-creation-response';
+export * from './investment-daily-rates-response';
 export * from './investment-update-request';
 export * from './investment-update-response';
 export * from './investments-by-user-id-response';
