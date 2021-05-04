@@ -14,12 +14,13 @@
 /**
  * 
  * @export
- * @enum {string}
+ * @interface ApprovePendingWithdrawalsResponse
  */
-export enum TransactionStatus {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1,
-    NUMBER_2 = 2,
-    NUMBER_3 = 3
+export interface ApprovePendingWithdrawalsResponse {
+    /**
+     * 
+     * @type {Array&lt;string&gt;}
+     * @memberof ApprovePendingWithdrawalsResponse
+     */
+    txRefs?: any | null;
 }
-
