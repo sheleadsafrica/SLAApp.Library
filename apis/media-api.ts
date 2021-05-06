@@ -27,6 +27,8 @@ import { CommentOnBlogRequest } from '../models';
 import { CommentOnBlogResponse } from '../models';
 import { CommentOnWebinarRequest } from '../models';
 import { CommentOnWebinarResponse } from '../models';
+import { DeleteBlogCommentResponse } from '../models';
+import { DeleteWebinarCommentResponse } from '../models';
 import { FAQsResponse } from '../models';
 import { FinanceDictionaryEntriesResponse } from '../models';
 import { LegalDocumentsResponse } from '../models';
@@ -37,6 +39,9 @@ import { SetBlogLikeResponse } from '../models';
 import { SetCommentLikeResponse } from '../models';
 import { SetWebinarBookmarkResponse } from '../models';
 import { UpdateBlogReadCountResponse } from '../models';
+import { UpdateCommentOnBlogResponse } from '../models';
+import { UpdateCommentOnWebinarResponse } from '../models';
+import { UpdateCommentRequest } from '../models';
 import { WebinarPostByIdResponse } from '../models';
 import { WebinarPostsFullResponse } from '../models';
 /**
@@ -45,6 +50,176 @@ import { WebinarPostsFullResponse } from '../models';
  */
 export const MediaApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * This can only be done by the logged in user.
+         * @summary Delete comment on a blog post
+         * @param {string} id blog comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteComment: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteComment.');
+            }
+            const localVarPath = `/media/blog/comment/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Delete comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebinarComment: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteWebinarComment.');
+            }
+            const localVarPath = `/media/webinar/comment/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a blog post
+         * @param {string} id blog comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        editComment: async (id: string, body?: UpdateCommentRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling editComment.');
+            }
+            const localVarPath = `/media/blog/comment/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        editWebinarComment: async (id: string, body?: UpdateCommentRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling editWebinarComment.');
+            }
+            const localVarPath = `/media/webinar/comment/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * This can only be done by the logged in user.
          * @summary Get BlogPosts by id
@@ -792,6 +967,64 @@ export const MediaApiFp = function(configuration?: Configuration) {
     return {
         /**
          * This can only be done by the logged in user.
+         * @summary Delete comment on a blog post
+         * @param {string} id blog comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteComment(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteBlogCommentResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).deleteComment(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Delete comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteWebinarComment(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteWebinarCommentResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).deleteWebinarComment(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a blog post
+         * @param {string} id blog comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async editComment(id: string, body?: UpdateCommentRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateCommentOnBlogResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).editComment(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async editWebinarComment(id: string, body?: UpdateCommentRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateCommentOnWebinarResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).editWebinarComment(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get BlogPosts by id
          * @param {string} id blog id
          * @param {*} [options] Override http request option.
@@ -1064,6 +1297,48 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * This can only be done by the logged in user.
+         * @summary Delete comment on a blog post
+         * @param {string} id blog comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteComment(id: string, options?: any): AxiosPromise<DeleteBlogCommentResponse> {
+            return MediaApiFp(configuration).deleteComment(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Delete comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteWebinarComment(id: string, options?: any): AxiosPromise<DeleteWebinarCommentResponse> {
+            return MediaApiFp(configuration).deleteWebinarComment(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a blog post
+         * @param {string} id blog comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        editComment(id: string, body?: UpdateCommentRequest, options?: any): AxiosPromise<UpdateCommentOnBlogResponse> {
+            return MediaApiFp(configuration).editComment(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Edit comment on a webinar post
+         * @param {string} id webinar comment id
+         * @param {UpdateCommentRequest} [body] request params
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        editWebinarComment(id: string, body?: UpdateCommentRequest, options?: any): AxiosPromise<UpdateCommentOnWebinarResponse> {
+            return MediaApiFp(configuration).editWebinarComment(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get BlogPosts by id
          * @param {string} id blog id
          * @param {*} [options] Override http request option.
@@ -1259,6 +1534,52 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class MediaApi extends BaseAPI {
+    /**
+     * This can only be done by the logged in user.
+     * @summary Delete comment on a blog post
+     * @param {string} id blog comment id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public deleteComment(id: string, options?: any) {
+        return MediaApiFp(this.configuration).deleteComment(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Delete comment on a webinar post
+     * @param {string} id webinar comment id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public deleteWebinarComment(id: string, options?: any) {
+        return MediaApiFp(this.configuration).deleteWebinarComment(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Edit comment on a blog post
+     * @param {string} id blog comment id
+     * @param {UpdateCommentRequest} [body] request params
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public editComment(id: string, body?: UpdateCommentRequest, options?: any) {
+        return MediaApiFp(this.configuration).editComment(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Edit comment on a webinar post
+     * @param {string} id webinar comment id
+     * @param {UpdateCommentRequest} [body] request params
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public editWebinarComment(id: string, body?: UpdateCommentRequest, options?: any) {
+        return MediaApiFp(this.configuration).editWebinarComment(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * This can only be done by the logged in user.
      * @summary Get BlogPosts by id
