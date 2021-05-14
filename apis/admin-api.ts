@@ -37,6 +37,7 @@ import { ChallengeUpdateResponse } from '../models';
 import { ChallengesResponse } from '../models';
 import { CreateTodo } from '../models';
 import { CreateTodoResponse } from '../models';
+import { CreateVideoOfTheWeekResponse } from '../models';
 import { FAQCreationRequest } from '../models';
 import { FAQCreationResponse } from '../models';
 import { FAQUpdateRequest } from '../models';
@@ -76,9 +77,11 @@ import { StashUpdateResponse } from '../models';
 import { TransactionsByUserIdResponse } from '../models';
 import { UpdateTodo } from '../models';
 import { UpdateTodoResponse } from '../models';
+import { UpdateVideoOfTheWeekResponse } from '../models';
 import { UpsertDailyRate } from '../models';
 import { UpsertDailyRateResponse } from '../models';
 import { UserAnalyticsResponse } from '../models';
+import { VideoOfTheWeekRequest } from '../models';
 import { WebinarPostCreationRequest } from '../models';
 import { WebinarPostCreationResponse } from '../models';
 import { WebinarPostUpdateRequest } from '../models';
@@ -559,6 +562,45 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
          */
         createTodo: async (body?: CreateTodo, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/todo/admin/todo`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Create a video of the week
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createVideoOfTheWeek: async (body?: VideoOfTheWeekRequest, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/media/admin/video-of-the-week`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1833,6 +1875,51 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Update a video of the week
+         * @param {string} id video of the week id
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateVideoOfTheWeek: async (id: string, body?: VideoOfTheWeekRequest, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateVideoOfTheWeek.');
+            }
+            const localVarPath = `/media/admin/video-of-the-week/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
          * @param {WebinarPostUpdateRequest} [body] request values
@@ -2175,6 +2262,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
          */
         async createTodo(body?: CreateTodo, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateTodoResponse>> {
             const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createTodo(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Create a video of the week
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createVideoOfTheWeek(body?: VideoOfTheWeekRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateVideoOfTheWeekResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).createVideoOfTheWeek(body, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -2599,6 +2700,21 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Update a video of the week
+         * @param {string} id video of the week id
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateVideoOfTheWeek(id: string, body?: VideoOfTheWeekRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateVideoOfTheWeekResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).updateVideoOfTheWeek(id, body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
          * @param {WebinarPostUpdateRequest} [body] request values
@@ -2783,6 +2899,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
          */
         createTodo(body?: CreateTodo, options?: any): AxiosPromise<CreateTodoResponse> {
             return AdminApiFp(configuration).createTodo(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Create a video of the week
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createVideoOfTheWeek(body?: VideoOfTheWeekRequest, options?: any): AxiosPromise<CreateVideoOfTheWeekResponse> {
+            return AdminApiFp(configuration).createVideoOfTheWeek(body, options).then((request) => request(axios, basePath));
         },
         /**
          * This can only be done by the logged in user.
@@ -3083,6 +3209,17 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Update a video of the week
+         * @param {string} id video of the week id
+         * @param {VideoOfTheWeekRequest} [body] request values
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateVideoOfTheWeek(id: string, body?: VideoOfTheWeekRequest, options?: any): AxiosPromise<UpdateVideoOfTheWeekResponse> {
+            return AdminApiFp(configuration).updateVideoOfTheWeek(id, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Update a WebinarPost
          * @param {string} id WebinarPost id
          * @param {WebinarPostUpdateRequest} [body] request values
@@ -3265,6 +3402,17 @@ export class AdminApi extends BaseAPI {
      */
     public createTodo(body?: CreateTodo, options?: any) {
         return AdminApiFp(this.configuration).createTodo(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Create a video of the week
+     * @param {VideoOfTheWeekRequest} [body] request values
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public createVideoOfTheWeek(body?: VideoOfTheWeekRequest, options?: any) {
+        return AdminApiFp(this.configuration).createVideoOfTheWeek(body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
@@ -3592,6 +3740,18 @@ export class AdminApi extends BaseAPI {
      */
     public updateTodo(id: string, body?: UpdateTodo, options?: any) {
         return AdminApiFp(this.configuration).updateTodo(id, body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Update a video of the week
+     * @param {string} id video of the week id
+     * @param {VideoOfTheWeekRequest} [body] request values
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public updateVideoOfTheWeek(id: string, body?: VideoOfTheWeekRequest, options?: any) {
+        return AdminApiFp(this.configuration).updateVideoOfTheWeek(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.

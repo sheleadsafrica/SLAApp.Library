@@ -42,6 +42,7 @@ import { UpdateBlogReadCountResponse } from '../models';
 import { UpdateCommentOnBlogResponse } from '../models';
 import { UpdateCommentOnWebinarResponse } from '../models';
 import { UpdateCommentRequest } from '../models';
+import { VideosOfTheWeekForYearResponse } from '../models';
 import { WebinarPostByIdResponse } from '../models';
 import { WebinarPostsFullResponse } from '../models';
 /**
@@ -585,6 +586,46 @@ export const MediaApiAxiosParamCreator = function (configuration?: Configuration
                 throw new RequiredError('year','Required parameter year was null or undefined when calling listMoneyTipsForYear.');
             }
             const localVarPath = `/media/money-tips/year/{year}`
+                .replace(`{${"year"}}`, encodeURIComponent(String(year)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
+         * @summary Get all Videos of the week for given year
+         * @param {number} year year for which videos will be queried
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVideosOfTheWeekForYear: async (year: number, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'year' is not null or undefined
+            if (year === null || year === undefined) {
+                throw new RequiredError('year','Required parameter year was null or undefined when calling listVideosOfTheWeekForYear.');
+            }
+            const localVarPath = `/media/videos-of-the-week/year/{year}`
                 .replace(`{${"year"}}`, encodeURIComponent(String(year)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1171,6 +1212,20 @@ export const MediaApiFp = function(configuration?: Configuration) {
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Get all Videos of the week for given year
+         * @param {number} year year for which videos will be queried
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listVideosOfTheWeekForYear(year: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VideosOfTheWeekForYearResponse>> {
+            const localVarAxiosArgs = await MediaApiAxiosParamCreator(configuration).listVideosOfTheWeekForYear(year, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all WebinarPosts with full data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1441,6 +1496,16 @@ export const MediaApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Get all Videos of the week for given year
+         * @param {number} year year for which videos will be queried
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listVideosOfTheWeekForYear(year: number, options?: any): AxiosPromise<VideosOfTheWeekForYearResponse> {
+            return MediaApiFp(configuration).listVideosOfTheWeekForYear(year, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Get all WebinarPosts with full data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1692,6 +1757,17 @@ export class MediaApi extends BaseAPI {
      */
     public listMoneyTipsForYear(year: number, options?: any) {
         return MediaApiFp(this.configuration).listMoneyTipsForYear(year, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Get all Videos of the week for given year
+     * @param {number} year year for which videos will be queried
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MediaApi
+     */
+    public listVideosOfTheWeekForYear(year: number, options?: any) {
+        return MediaApiFp(this.configuration).listVideosOfTheWeekForYear(year, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
