@@ -990,6 +990,46 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Delete an MoneyTip
+         * @param {string} id MoneyTip id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteVideoOfTheWeek: async (id: string, options: any = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteVideoOfTheWeek.');
+            }
+            const localVarPath = `/media/admin/video-of-the-week/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Delete an WebinarPost
          * @param {string} id WebinarPost id
          * @param {*} [options] Override http request option.
@@ -2407,6 +2447,20 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Delete an MoneyTip
+         * @param {string} id MoneyTip id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteVideoOfTheWeek(id: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).deleteVideoOfTheWeek(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Delete an WebinarPost
          * @param {string} id WebinarPost id
          * @param {*} [options] Override http request option.
@@ -3000,6 +3054,16 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * This can only be done by the logged in user.
+         * @summary Delete an MoneyTip
+         * @param {string} id MoneyTip id
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteVideoOfTheWeek(id: string, options?: any): AxiosPromise<void> {
+            return AdminApiFp(configuration).deleteVideoOfTheWeek(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * This can only be done by the logged in user.
          * @summary Delete an WebinarPost
          * @param {string} id WebinarPost id
          * @param {*} [options] Override http request option.
@@ -3510,6 +3574,17 @@ export class AdminApi extends BaseAPI {
      */
     public deleteMoneyTip(id: string, options?: any) {
         return AdminApiFp(this.configuration).deleteMoneyTip(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * This can only be done by the logged in user.
+     * @summary Delete an MoneyTip
+     * @param {string} id MoneyTip id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public deleteVideoOfTheWeek(id: string, options?: any) {
+        return AdminApiFp(this.configuration).deleteVideoOfTheWeek(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * This can only be done by the logged in user.
