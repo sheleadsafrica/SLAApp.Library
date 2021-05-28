@@ -22,12 +22,6 @@ export interface PortfolioAnalyticsResponse {
      * @type {number}
      * @memberof PortfolioAnalyticsResponse
      */
-    totalOpenAccounts?: any;
-    /**
-     * 
-     * @type {number}
-     * @memberof PortfolioAnalyticsResponse
-     */
     totalGoalAccounts?: any;
     /**
      * 
@@ -52,6 +46,54 @@ export interface PortfolioAnalyticsResponse {
      * @type {number}
      * @memberof PortfolioAnalyticsResponse
      */
+    totalUsersGoalAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalUsersChallengeAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalUsersStashAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalUsersInvestmentAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalBalanceGoalAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalBalanceChallengeAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalBalanceStashAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalBalanceInvestmentAccounts?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
     totalTransactionsPast7DaysTransactions?: any;
     /**
      * 
@@ -65,4 +107,22 @@ export interface PortfolioAnalyticsResponse {
      * @memberof PortfolioAnalyticsResponse
      */
     totalWithdrawals7DaysTransactions?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalTransactionsPast30DaysTransactions?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalDeposits30DaysTransactions?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PortfolioAnalyticsResponse
+     */
+    totalWithdrawals30DaysTransactions?: any;
 }

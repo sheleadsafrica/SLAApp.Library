@@ -59,4 +59,10 @@ export interface PendingWithdrawal {
      * @memberof PendingWithdrawal
      */
     accountType?: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof PendingWithdrawal
+     */
+    accountBalance?: any;
 }
