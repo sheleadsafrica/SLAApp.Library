@@ -28,6 +28,12 @@ export interface AddCardResponse {
      * @type {boolean}
      * @memberof AddCardResponse
      */
+    requiresPinToStart?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AddCardResponse
+     */
     verificationRequired?: any;
     /**
      * 

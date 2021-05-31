@@ -47,4 +47,10 @@ export interface AddCardRequest {
      * @memberof AddCardRequest
      */
     country?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof AddCardRequest
+     */
+    pin?: any | null;
 }

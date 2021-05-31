@@ -14,13 +14,13 @@
 /**
  * 
  * @export
- * @interface Body1
+ * @interface AdminUploadBody
  */
-export interface Body1 {
+export interface AdminUploadBody {
     /**
-     * 
+     * file to upload
      * @type {string}
-     * @memberof Body1
+     * @memberof AdminUploadBody
      */
     file?: any | null;
 }
