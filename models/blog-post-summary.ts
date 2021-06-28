@@ -46,6 +46,24 @@ export interface BlogPostSummary {
      * @type {string}
      * @memberof BlogPostSummary
      */
+    title?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BlogPostSummary
+     */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BlogPostSummary
+     */
+    imgUrl?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof BlogPostSummary
+     */
     category?: any | null;
     /**
      * 
