@@ -28,6 +28,24 @@ export interface FinanceProfile {
      * @type {string}
      * @memberof FinanceProfile
      */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinanceProfile
+     */
+    occupation?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinanceProfile
+     */
+    occupationOther?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof FinanceProfile
+     */
     monthlyEarnings?: any | null;
     /**
      * 

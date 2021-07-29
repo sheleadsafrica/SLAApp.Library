@@ -28,6 +28,24 @@ export interface UpdateFinance {
      * @type {string}
      * @memberof UpdateFinance
      */
+    description?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateFinance
+     */
+    occupation?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateFinance
+     */
+    occupationOther?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateFinance
+     */
     monthlyEarnings?: any | null;
     /**
      * 
