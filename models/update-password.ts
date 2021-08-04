@@ -28,5 +28,11 @@ export interface UpdatePassword {
      * @type {string}
      * @memberof UpdatePassword
      */
+    oldPassword?: any | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdatePassword
+     */
     newPassword?: any | null;
 }
