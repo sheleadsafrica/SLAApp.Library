@@ -18,6 +18,7 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { ChangePIN } from '../models';
 import { ChangePINResponse } from '../models';
+import { CurrentStreakResponse } from '../models';
 import { FinanceDetailsByIdResponse } from '../models';
 import { GetUserProfilesFromListResponse } from '../models';
 import { PinByIdResponse } from '../models';
@@ -124,6 +125,39 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             if (ids !== undefined) {
                 localVarQueryParameter['ids'] = ids;
             }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        streak: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/streak`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -333,6 +367,39 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateStreak: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/user/update-streak`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -421,6 +488,18 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async streak(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrentStreakResponse>> {
+            const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).streak(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {UpdateFinance} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -486,6 +565,18 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateStreak(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await UserApiAxiosParamCreator(configuration).updateStreak(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} [file] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -533,6 +624,14 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        streak(options?: any): AxiosPromise<CurrentStreakResponse> {
+            return UserApiFp(configuration).streak(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {UpdateFinance} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -575,6 +674,14 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          */
         updateSecurityQuestion(body?: UpdateSecurityQuestion, options?: any): AxiosPromise<UpdateSecurityQuestionResponse> {
             return UserApiFp(configuration).updateSecurityQuestion(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateStreak(options?: any): AxiosPromise<void> {
+            return UserApiFp(configuration).updateStreak(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -625,6 +732,15 @@ export class UserApi extends BaseAPI {
     }
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public streak(options?: any) {
+        return UserApiFp(this.configuration).streak(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {UpdateFinance} [body] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -672,6 +788,15 @@ export class UserApi extends BaseAPI {
      */
     public updateSecurityQuestion(body?: UpdateSecurityQuestion, options?: any) {
         return UserApiFp(this.configuration).updateSecurityQuestion(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public updateStreak(options?: any) {
+        return UserApiFp(this.configuration).updateStreak(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

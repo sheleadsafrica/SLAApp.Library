@@ -79,6 +79,7 @@ export * from './create-todo';
 export * from './create-todo-response';
 export * from './create-video-of-the-week-response';
 export * from './current-month-challenge-response';
+export * from './current-streak-response';
 export * from './daily-rate';
 export * from './delete-bank-account-account-response';
 export * from './delete-blog-comment-response';
