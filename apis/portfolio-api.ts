@@ -36,6 +36,7 @@ import { Overview } from '../models';
 import { ProblemDetails } from '../models';
 import { StashByIdResponse } from '../models';
 import { StashesResponse } from '../models';
+import { TotalSavingsByOwnerIdResponse } from '../models';
 import { WithdrawalConfirmationRequest } from '../models';
 import { WithdrawalRequest } from '../models';
 import { WithdrawalResponse } from '../models';
@@ -335,6 +336,39 @@ export const PortfolioApiAxiosParamCreator = function (configuration?: Configura
          */
         getInvestmentsHelpUrl: async (options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/portfolio/help/investments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTotalSavings: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/totalSavings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -918,6 +952,18 @@ export const PortfolioApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTotalSavings(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TotalSavingsByOwnerIdResponse>> {
+            const localVarAxiosArgs = await PortfolioApiAxiosParamCreator(configuration).getTotalSavings(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1152,6 +1198,14 @@ export const PortfolioApiFactory = function (configuration?: Configuration, base
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTotalSavings(options?: any): AxiosPromise<TotalSavingsByOwnerIdResponse> {
+            return PortfolioApiFp(configuration).getTotalSavings(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1344,6 +1398,15 @@ export class PortfolioApi extends BaseAPI {
      */
     public getInvestmentsHelpUrl(options?: any) {
         return PortfolioApiFp(this.configuration).getInvestmentsHelpUrl(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PortfolioApi
+     */
+    public getTotalSavings(options?: any) {
+        return PortfolioApiFp(this.configuration).getTotalSavings(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

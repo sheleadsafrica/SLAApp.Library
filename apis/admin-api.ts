@@ -74,6 +74,7 @@ import { StashCreationRequest } from '../models';
 import { StashCreationResponse } from '../models';
 import { StashUpdateRequest } from '../models';
 import { StashUpdateResponse } from '../models';
+import { TotalSavingsByOwnerIdResponse } from '../models';
 import { TransactionsByUserIdResponse } from '../models';
 import { UpdateInvestmentHelpURL } from '../models';
 import { UpdateInvestmentHelpURLResponse } from '../models';
@@ -1086,6 +1087,44 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                query.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTotalSavingsByOwnerId: async (userId?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/portfolio/admin/totalSavings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -2527,6 +2566,19 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTotalSavingsByOwnerId(userId?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TotalSavingsByOwnerIdResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).getTotalSavingsByOwnerId(userId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3135,6 +3187,15 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTotalSavingsByOwnerId(userId?: string, options?: any): AxiosPromise<TotalSavingsByOwnerIdResponse> {
+            return AdminApiFp(configuration).getTotalSavingsByOwnerId(userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -3667,6 +3728,16 @@ export class AdminApi extends BaseAPI {
      */
     public getPendingWithdrawals(options?: any) {
         return AdminApiFp(this.configuration).getPendingWithdrawals(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} [userId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AdminApi
+     */
+    public getTotalSavingsByOwnerId(userId?: string, options?: any) {
+        return AdminApiFp(this.configuration).getTotalSavingsByOwnerId(userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

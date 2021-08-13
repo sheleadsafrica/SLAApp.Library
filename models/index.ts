@@ -173,6 +173,7 @@ export * from './stashes-response';
 export * from './todo';
 export * from './todo-admin-data';
 export * from './todo-criteria';
+export * from './total-savings-by-owner-id-response';
 export * from './traits';
 export * from './transaction';
 export * from './transaction-data';
