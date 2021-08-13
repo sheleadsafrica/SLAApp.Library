@@ -53,4 +53,10 @@ export interface WebinarPostUpdateRequest {
      * @memberof WebinarPostUpdateRequest
      */
     isFeatured: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof WebinarPostUpdateRequest
+     */
+    minimumSavings?: any;
 }
