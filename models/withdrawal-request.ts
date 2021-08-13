@@ -35,4 +35,10 @@ export interface WithdrawalRequest {
      * @memberof WithdrawalRequest
      */
     amount?: any;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof WithdrawalRequest
+     */
+    closeAccount?: any;
 }
