@@ -59,4 +59,10 @@ export interface WebinarPostCreationRequest {
      * @memberof WebinarPostCreationRequest
      */
     isFeatured: any;
+    /**
+     * 
+     * @type {number}
+     * @memberof WebinarPostCreationRequest
+     */
+    minimumSavings?: any;
 }

@@ -73,6 +73,12 @@ export interface WebinarPost {
     isFeatured?: any;
     /**
      * 
+     * @type {number}
+     * @memberof WebinarPost
+     */
+    minimumSavings?: any;
+    /**
+     * 
      * @type {Array&lt;WebinarComment&gt;}
      * @memberof WebinarPost
      */
