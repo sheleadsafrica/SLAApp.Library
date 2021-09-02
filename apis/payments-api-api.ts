@@ -25,7 +25,6 @@ import { BankAccountsByOwnerIdResponse } from '../models';
 import { CardsByOwnerIdResponse } from '../models';
 import { DeleteBankAccountAccountResponse } from '../models';
 import { DeleteCardResponse } from '../models';
-import { FlutterwaveWebhook } from '../models';
 import { ProblemDetails } from '../models';
 import { VerifyCardRequest } from '../models';
 import { VerifyCardResponse } from '../models';
@@ -291,50 +290,6 @@ export const PaymentsApiApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @param {string} id 
-         * @param {FlutterwaveWebhook} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentWebhookFlutterwaveIdPost: async (id: string, body?: FlutterwaveWebhook, options: any = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling paymentWebhookFlutterwaveIdPost.');
-            }
-            const localVarPath = `/payment/webhook/flutterwave/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.query) {
-                query.set(key, options.query[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
          * @param {VerifyCardRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -476,20 +431,6 @@ export const PaymentsApiApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {FlutterwaveWebhook} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paymentWebhookFlutterwaveIdPost(id: string, body?: FlutterwaveWebhook, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await PaymentsApiApiAxiosParamCreator(configuration).paymentWebhookFlutterwaveIdPost(id, body, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @param {string} id 
          * @param {VerifyCardRequest} [body] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -569,16 +510,6 @@ export const PaymentsApiApiFactory = function (configuration?: Configuration, ba
          */
         getCards(options?: any): AxiosPromise<CardsByOwnerIdResponse> {
             return PaymentsApiApiFp(configuration).getCards(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {string} id 
-         * @param {FlutterwaveWebhook} [body] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paymentWebhookFlutterwaveIdPost(id: string, body?: FlutterwaveWebhook, options?: any): AxiosPromise<void> {
-            return PaymentsApiApiFp(configuration).paymentWebhookFlutterwaveIdPost(id, body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -666,17 +597,6 @@ export class PaymentsApiApi extends BaseAPI {
      */
     public getCards(options?: any) {
         return PaymentsApiApiFp(this.configuration).getCards(options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * 
-     * @param {string} id 
-     * @param {FlutterwaveWebhook} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaymentsApiApi
-     */
-    public paymentWebhookFlutterwaveIdPost(id: string, body?: FlutterwaveWebhook, options?: any) {
-        return PaymentsApiApiFp(this.configuration).paymentWebhookFlutterwaveIdPost(id, body, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
