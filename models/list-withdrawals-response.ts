@@ -14,13 +14,13 @@
 /**
  * 
  * @export
- * @interface PendingWithdrawalsResponse
+ * @interface ListWithdrawalsResponse
  */
-export interface PendingWithdrawalsResponse {
+export interface ListWithdrawalsResponse {
     /**
      * 
-     * @type {Array&lt;PendingWithdrawal&gt;}
-     * @memberof PendingWithdrawalsResponse
+     * @type {Array&lt;WithdrawalSummary&gt;}
+     * @memberof ListWithdrawalsResponse
      */
     withdrawals?: any | null;
 }

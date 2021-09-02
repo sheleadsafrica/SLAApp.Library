@@ -14,55 +14,61 @@
 /**
  * 
  * @export
- * @interface PendingWithdrawal
+ * @interface WithdrawalSummary
  */
-export interface PendingWithdrawal {
+export interface WithdrawalSummary {
     /**
      * 
      * @type {string}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     txRef?: any;
     /**
      * 
      * @type {number}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     amount?: any;
     /**
      * 
      * @type {number}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     date?: any;
     /**
      * 
      * @type {string}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     userId?: any;
     /**
      * 
      * @type {string}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     fullName?: any | null;
     /**
      * 
      * @type {string}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     accountName?: any | null;
     /**
      * 
      * @type {AccountType}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     accountType?: any;
     /**
      * 
      * @type {number}
-     * @memberof PendingWithdrawal
+     * @memberof WithdrawalSummary
      */
     accountBalance?: any;
+    /**
+     * 
+     * @type {TransactionStatus}
+     * @memberof WithdrawalSummary
+     */
+    status?: any;
 }
