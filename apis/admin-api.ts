@@ -1073,11 +1073,11 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {number} [body] 
+         * @param {number} [fromDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getApprovedWithdrawals: async (body?: number, options: any = {}): Promise<RequestArgs> => {
+        getApprovedWithdrawals: async (fromDate?: number, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/portfolio/admin/withdrawals/approved`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -1089,7 +1089,9 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+            if (fromDate !== undefined) {
+                localVarQueryParameter['FromDate'] = fromDate;
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1101,8 +1103,6 @@ export const AdminApiAxiosParamCreator = function (configuration?: Configuration
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -2592,12 +2592,12 @@ export const AdminApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} [body] 
+         * @param {number} [fromDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getApprovedWithdrawals(body?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListWithdrawalsResponse>> {
-            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).getApprovedWithdrawals(body, options);
+        async getApprovedWithdrawals(fromDate?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListWithdrawalsResponse>> {
+            const localVarAxiosArgs = await AdminApiAxiosParamCreator(configuration).getApprovedWithdrawals(fromDate, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -3230,12 +3230,12 @@ export const AdminApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {number} [body] 
+         * @param {number} [fromDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getApprovedWithdrawals(body?: number, options?: any): AxiosPromise<ListWithdrawalsResponse> {
-            return AdminApiFp(configuration).getApprovedWithdrawals(body, options).then((request) => request(axios, basePath));
+        getApprovedWithdrawals(fromDate?: number, options?: any): AxiosPromise<ListWithdrawalsResponse> {
+            return AdminApiFp(configuration).getApprovedWithdrawals(fromDate, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -3782,13 +3782,13 @@ export class AdminApi extends BaseAPI {
     }
     /**
      * 
-     * @param {number} [body] 
+     * @param {number} [fromDate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AdminApi
      */
-    public getApprovedWithdrawals(body?: number, options?: any) {
-        return AdminApiFp(this.configuration).getApprovedWithdrawals(body, options).then((request) => request(this.axios, this.basePath));
+    public getApprovedWithdrawals(fromDate?: number, options?: any) {
+        return AdminApiFp(this.configuration).getApprovedWithdrawals(fromDate, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
